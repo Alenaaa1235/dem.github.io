@@ -1,470 +1,953 @@
-<!DOCTYPE html>
-<html>
 <body>
-<a href="krossvordRU.html">Русский кроссворд</a>
-body {
-            font-family: 'Arial', sans-serif;
-            background-color: #eaf6ff;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #d42300;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-        .crossword {
-            display: inline-block;
-            margin: 20px auto;
-            border: 2px solid #333;
-        }
-        .crossword table {
-            border-collapse: collapse;
-        }
-        .crossword td {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #333;
-            text-align: center;
-            vertical-align: middle;
-            font-weight: bold;
-            font-size: 14px;
-            background-color: #fff;
-        }
-        .crossword .black {
-            background-color: #333;
-        }
-        .crossword .number {
-            font-size: 10px;
-            color: #000;
-            position: relative;
-            top: -15px;
-            left: -15px;
-        }
-        .clues {
-            max-width: 600px;
-            margin: 20px auto;
-            text-align: left;
-        }
-        .clues h2 {
-            color: #2a5c2e;
-        }
-        .clues ul {
-            padding-left: 20px;
-        }
-        .clues li {
-            margin-bottom: 8px;
-        }
-    </style>
-</head>
-<body>
-    <h1>🎄 Новогодний кроссворд 🎁</h1>
-
-    <div class="crossword">
-        <table>
-            <!-- Сетка 9×9 -->
-            <tr>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td><span class="number">1</span>Ё</td>
-                <td>Л</td>
-                <td><span class="number">2</span>С</td>
-                <td class="black"></td>
-                <td><span class="number">6</span>П</td>
-                <td class="black"></td>
-                <td class="black"></td>
-            </tr>
-            <tr>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>Л</td>
-                <td>К</td>
-                <td>Н</td>
-                <td class="black"></td>
-                <td>О</td>
-                <td class="black"></td>
-                <td class="black"></td>
-            </tr>
-            <tr>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>К</td>
-                <td>А</td>
-                <td><span class="number">7</span>С</td>
-                <td>А</td>
-                <td>Д</td>
-                <td><span class="number">8</span>С</td>
-                <td class="black"></td>
-            </tr>
-            <tr>
-                <td class="black"></td>
-                <td><span class="number">3</span>Д</td>
-                <td><span class="number">4</span>М</td>
-                <td>О</td>
-                <td>Н</td>
-                <td>Е</td>
-                <td>Р</td>
-                <td>Н</td>
-                <td>Е</td>
-            </tr>
-            <tr>
-                <td>Е</td>
-                <td>Е</td>
-                <td>А</td>
-                <td>Р</td>
-                <td>Е</td>
-                <td>Ж</td>
-                <td>О</td>
-                <td>Г</td>
-                <td>Г</td>
-            </tr>
-            <tr>
-                <td>Д</td>
-                <td>Д</td>
-                <td>С</td>
-                <td>О</td>
-                <td>З</td>
-                <td class="black"></td>
-                <td>В</td>
-                <td>О</td>
-                <td>И</td>
-            </tr>
-            <tr>
-                <td>М</td>
-                <td>М</td>
-                <td>К</td>
-                <td>З</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td><span class="number">9</span>М</td>
-                <td>Ё</td>
-                <td><span class="number">10</span>В</td>
-            </tr>
-            <tr>
-                <td><span class="number">5</span>Х</td>
-                <td>Л</td>
-                <td>О</td>
-                <td>П</td>
-                <td>У</td>
-                <td>Ш</td>
-                <td>К</td>
-                <td>А</td>
-                <td>А</td>
-            </tr>
-            <tr>
-                <td>А</td>
-                <td>Н</td>
-                <td>И</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>Р</td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="clues">
-        <h2>Вопросы</h2>
-        <h3>По горизонтали:</h3>
-        <ul>
-            <li><strong>1.</strong> Главное новогоднее дерево.</li>
-            <li><strong>3.</strong> Сказочный зимний волшебник.</li>
-            <li><strong>5.</strong> Шумная бумажная новогодняя игрушка.</li>
-            <li><strong>7.</strong> Транспорт Деда Мороза.</li>
-            <li><strong>9.</strong> Сладкий продукт пчёл, часто угощение в сказках.</li>
-        </ul>
-
-        <h3>По вертикали:</h3>
-        <ul>
-            <li><strong>2.</strong> Из него лепят снеговика.</li>
-            <li><strong>4.</strong> Карнавальный атрибут.</li>
-            <li><strong>6.</strong> То, что кладут под ёлку.</li>
-            <li><strong>8.</strong> Зимняя фигурка из снега.</li>
-            <li><strong>10.</strong> Сладкое лакомство из ягод или фруктов.</li>
-        </ul>
-
-        <p><em>Ответы: 1. ЁЛКА, 2. СНЕГ, 3. ДЕДМОРОЗ, 4. МАСКА, 5. ХЛОПУШКА, 6. ПОДАРОК, 7. САНИ, 8. СНЕГОВИК, 9. МЁД, 10. ВАРЕНЬЕ</em></p>
-    </div>
-
-</body>
-</html>
-
-
-
-
-
-<body>
-<a href="krossvordEN.html">Английский кроссворд</a>
-            
-body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a4a6e, #1e7c2a);
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 2.4em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-        }
-        .subtitle {
-            font-style: italic;
-            margin-bottom: 25px;
-            opacity: 0.9;
-        }
-        .crossword {
-            display: inline-block;
-            background-color: #121212;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
-        }
-        table {
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-        td {
-            width: 45px;
-            height: 45px;
-            border: 2px solid #444;
-            font-size: 18px;
-            font-weight: bold;
-            background-color: #f9f9f9;
-            color: #000;
-            position: relative;
-        }
-        td.black {
-            background-color: #333;
-        }
-        .number {
-            position: absolute;
-            top: 2px;
-            left: 3px;
-            font-size: 10px;
-            color: #d00;
-            font-weight: bold;
-        }
-        .clues {
-            max-width: 600px;
-            margin: 25px auto;
-            text-align: left;
-            background: rgba(0,0,0,0.2);
-            padding: 20px;
-            border-radius: 8px;
-        }
-        .clues h2 {
-            border-bottom: 2px solid #e5c100;
-            padding-bottom: 5px;
-            color: #ffd700;
-        }
-        .clues ul {
-            padding-left: 20px;
-        }
-        .clues li {
-            margin: 6px 0;
-        }
-        .answer-key {
-            margin-top: 20px;
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-        @media (max-width: 600px) {
-            td { width: 36px; height: 36px; font-size: 14px; }
-            .number { font-size: 8px; }
-        }
-    </style>
-</head>
-<body>
-    <h1>🎄 Christmas Crossword 🎁</h1>
-    <p class="subtitle">Solve 10 festive English words!</p>
-
-    <div class="crossword">
-        <table>
-            <!-- Row 0 -->
-            <tr>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td><span class="number">1</span>S</td>
-                <td>N</td>
-                <td>O</td>
-                <td>W</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-            </tr>
-            <!-- Row 1 -->
-            <tr>
-                <td class="black"></td>
-                <td><span class="number">2</span>T</td>
-                <td>R</td>
-                <td>E</td>
-                <td>E</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-            </tr>
-            <!-- Row 2 -->
-            <tr>
-                <td><span class="number">3</span>G</td>
-                <td>I</td>
-                <td>F</td>
-                <td>T</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-            </tr>
-            <!-- Row 3 -->
-            <tr>
-                <td> <span class="number">4</span>S</td>
-                <td>T</td>
-                <td>A</td>
-                <td>R</td>
-                <td class="black"></td>
-                <td><span class="number">6</span>B</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td><span class="number">8</span>E</td>
-                <td class="black"></td>
-            </tr>
-            <!-- Row 4 -->
-            <tr>
-                <td>T</td>
-                <td><span class="number">5</span>J</td>
-                <td>O</td>
-                <td>L</td>
-                <td>L</td>
-                <td>E</td>
-                <td>L</td>
-                <td class="black"></td>
-                <td>L</td>
-                <td class="black"></td>
-            </tr>
-            <!-- Row 5 -->
-            <tr>
-                <td><span class="number">7</span>W</td>
-                <td>R</td>
-                <td>E</td>
-                <td>A</td>
-                <td>T</td>
-                <td>H</td>
-                <td class="black"></td>
-                <td><span class="number">9</span>N</td>
-                <td>F</td>
-                <td class="black"></td>
-            </tr>
-            <!-- Row 6 -->
-            <tr>
-                <td>R</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>O</td>
-                <td class="black"></td>
-                <td><span class="number">10</span>S</td>
-            </tr>
-            <!-- Row 7 -->
-            <tr>
-                <td>E</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>E</td>
-                <td class="black"></td>
-                <td>L</td>
-            </tr>
-            <!-- Row 8 -->
-            <tr>
-                <td>A</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>L</td>
-                <td class="black"></td>
-                <td>E</td>
-            </tr>
-            <!-- Row 9 -->
-            <tr>
-                <td>T</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>I</td>
-            </tr>
-            <!-- Row 10 (extra for SLEIGH) -->
-            <tr>
-                <td>H</td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>G</td>
-            </tr>
-            <tr>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td class="black"></td>
-                <td>H</td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="clues">
-        <h2>Across</h2>
-        <ul>
-            <li><strong>1.</strong> White flakes from the sky</li>
-            <li><strong>3.</strong> Present under the tree</li>
-            <li><strong>5.</strong> “___ old St. Nick” (Santa’s mood)</li>
-            <li><strong>7.</strong> Circular decoration on the door</li>
-            <li><strong>9.</strong> French word for Christmas</li>
-        </ul>
-
-        <h2>Down</h2>
-        <ul>
-            <li><strong>2.</strong> Decorated evergreen plant</li>
-            <li><strong>4.</strong> Top decoration on the tree</li>
-            <li><strong>6.</strong> “Silver ___ ringing”</li>
-            <li><strong>8.</strong> Santa’s little helper</li>
-            <li><strong>10.</strong> Santa’s vehicle</li>
-        </ul>
-
-        <p class="answer-key">
-            <em>Answers: 1. SNOW, 2. TREE, 3. GIFT, 4. STAR, 5. JOLLY, 6. BELLS, 7. WREATH, 8. ELF, 9. NOEL, 10. SLEIGH</em>
-        </p>
-    </div>
-
-
-  
-</body>
-</html>
+<a hret="Alenaaa1235.github.io"N</a>
+</body>{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "82ebd430-76c1-436c-8a5d-89288acc9d73",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите длину стороны квадрата:  5\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Площадь квадрата: 25.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод длины стороны квадрата\n",
+    "side = float(input(\"Введите длину стороны квадрата: \"))\n",
+    "\n",
+    "# Вычисление площади\n",
+    "area = side * side\n",
+    "\n",
+    "# Вывод результата\n",
+    "print(\"Площадь квадрата:\", area)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "ba6b1ff2-c144-440d-995a-4ea86a5271df",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите длину первой стороны:  10\n",
+      "Введите длину второй стороны:  5\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Площадь прямоугольника: 50.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод длин сторон прямоугольника\n",
+    "a = float(input(\"Введите длину первой стороны: \"))\n",
+    "b = float(input(\"Введите длину второй стороны: \"))\n",
+    "\n",
+    "# Вычисление площади\n",
+    "area = a * b\n",
+    "\n",
+    "# Вывод результата\n",
+    "print(\"Площадь прямоугольника:\", area)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "5113d464-76c1-4ae7-aba4-f01c958b2a39",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите первое число:  5\n",
+      "Введите второе число:  9\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Среднее арифметическое: 7.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод двух чисел\n",
+    "num1 = float(input(\"Введите первое число: \"))\n",
+    "num2 = float(input(\"Введите второе число: \"))\n",
+    "\n",
+    "# Вычисление среднего арифметического\n",
+    "average = (num1 + num2) / 2\n",
+    "\n",
+    "# Вывод результата\n",
+    "print(\"Среднее арифметическое:\", average)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "1d156cb3-6565-43e8-8baf-28ac1121905f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите первое число:  8\n",
+      "Введите второе число:  12\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Среднее арифметическое: 10.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод двух чисел от пользователя\n",
+    "num1 = float(input(\"Введите первое число: \"))\n",
+    "num2 = float(input(\"Введите второе число: \"))\n",
+    "\n",
+    "# Вычисление среднего арифметического\n",
+    "average = (num1 + num2) / 2\n",
+    "\n",
+    "# Вывод результата\n",
+    "print(\"Среднее арифметическое:\", average)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "44baa27e-d256-4333-bec3-9ad3b6889fa3",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите длину первого катета:  25\n",
+      "Введите длину второго катета:  5\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Гипотенуза: 25.495097567963924\n",
+      "Площадь: 62.5\n"
+     ]
+    }
+   ],
+   "source": [
+    "import math\n",
+    "\n",
+    "# Ввод длин катетов\n",
+    "a = float(input(\"Введите длину первого катета: \"))\n",
+    "b = float(input(\"Введите длину второго катета: \"))\n",
+    "\n",
+    "# Вычисление гипотенузы по теореме Пифагора: c = sqrt(a^2 + b^2)\n",
+    "hypotenuse = math.sqrt(a**2 + b**2)\n",
+    "\n",
+    "# Вычисление площади: S = (a * b) / 2\n",
+    "area = (a * b) / 2\n",
+    "\n",
+    "# Вывод результатов\n",
+    "print(f\"Гипотенуза: {hypotenuse}\")\n",
+    "print(f\"Площадь: {area}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "43970e07-aa28-4ed5-8967-16cde281e464",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите число N:  23\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "484, 529, 576\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод числа N\n",
+    "n = int(input(\"Введите число N: \"))\n",
+    "\n",
+    "# Вычисление квадратов\n",
+    "val1 = (n - 1) ** 2\n",
+    "val2 = n ** 2\n",
+    "val3 = (n + 1) ** 2\n",
+    "\n",
+    "# Вывод через запятую\n",
+    "print(f\"{val1}, {val2}, {val3}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "ee24101e-ef68-46b2-a436-f0ed529ff342",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите год:  1999\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Год не високосный\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод года\n",
+    "year = int(input(\"Введите год: \"))\n",
+    "\n",
+    "# Проверка на високосный год\n",
+    "if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):\n",
+    "    print(\"Год високосный\")\n",
+    "else:\n",
+    "    print(\"Год не високосный\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "5ee82296-1841-4021-ae34-baf74e713004",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите целое число:  30\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Число четное\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод целого числа\n",
+    "number = int(input(\"Введите целое число: \"))\n",
+    "\n",
+    "# Проверка на четность с помощью оператора остатка от деления (%)\n",
+    "if number % 2 == 0:\n",
+    "    print(\"Число четное\")\n",
+    "else:\n",
+    "    print(\"Число нечетное\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "082cca46-1e55-4abc-92b5-52bbecc6c6a9",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите первое число:  21\n",
+      "Введите второе число:  12\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Первое число не меньше второго. Разность: 9.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод двух чисел\n",
+    "num1 = float(input(\"Введите первое число: \"))\n",
+    "num2 = float(input(\"Введите второе число: \"))\n",
+    "\n",
+    "# Проверка условия\n",
+    "if num1 < num2:\n",
+    "    # Если первое меньше второго, вычисляем сумму\n",
+    "    result = num1 + num2\n",
+    "    print(f\"Первое число меньше второго. Сумма: {result}\")\n",
+    "else:\n",
+    "    # Иначе (если первое больше или равно второму) вычисляем разность\n",
+    "    result = num1 - num2\n",
+    "    print(f\"Первое число не меньше второго. Разность: {result}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "b38ebd7e-b160-4ae8-bc66-4fc66c481431",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Первые 16 степеней числа 2:\n",
+      "2^0 = 1\n",
+      "2^1 = 2\n",
+      "2^2 = 4\n",
+      "2^3 = 8\n",
+      "2^4 = 16\n",
+      "2^5 = 32\n",
+      "2^6 = 64\n",
+      "2^7 = 128\n",
+      "2^8 = 256\n",
+      "2^9 = 512\n",
+      "2^10 = 1024\n",
+      "2^11 = 2048\n",
+      "2^12 = 4096\n",
+      "2^13 = 8192\n",
+      "2^14 = 16384\n",
+      "2^15 = 32768\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"Первые 16 степеней числа 2:\")\n",
+    "for i in range(16):\n",
+    "    print(f\"2^{i} = {2 ** i}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "b70a7e6f-a62d-4644-88c3-aab588aab6f4",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Введите 10 целых чисел:\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Число 1:  3\n",
+      "Число 2:  7\n",
+      "Число 3:  8\n",
+      "Число 4:  4\n",
+      "Число 5:  6\n",
+      "Число 6:  63\n",
+      "Число 7:  40\n",
+      "Число 8:  54\n",
+      "Число 9:  45\n",
+      "Число 10:  45\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Количество четных чисел: 5\n"
+     ]
+    }
+   ],
+   "source": [
+    "count_even = 0  # Счетчик четных чисел\n",
+    "\n",
+    "print(\"Введите 10 целых чисел:\")\n",
+    "\n",
+    "for i in range(10):\n",
+    "    num = int(input(f\"Число {i + 1}: \"))\n",
+    "    if num % 2 == 0:\n",
+    "        count_even += 1\n",
+    "\n",
+    "print(f\"Количество четных чисел: {count_even}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "adc99e06-d3c6-46ab-8d99-79362d0c8cf8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Введите 10 целых чисел:\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Число 1:  -3\n",
+      "Число 2:  0\n",
+      "Число 3:  237\n",
+      "Число 4:  29\n",
+      "Число 5:  -9\n",
+      "Число 6:  -63\n",
+      "Число 7:  89\n",
+      "Число 8:  0\n",
+      "Число 9:  27\n",
+      "Число 10:  -4\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Положительных чисел: 4\n",
+      "Отрицательных чисел: 4\n",
+      "Нулей: 2\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Инициализация счетчиков\n",
+    "positive_count = 0\n",
+    "negative_count = 0\n",
+    "zero_count = 0\n",
+    "\n",
+    "print(\"Введите 10 целых чисел:\")\n",
+    "\n",
+    "for i in range(10):\n",
+    "    num = int(input(f\"Число {i + 1}: \"))\n",
+    "    \n",
+    "    if num > 0:\n",
+    "        positive_count += 1\n",
+    "    elif num < 0:\n",
+    "        negative_count += 1\n",
+    "    else:\n",
+    "        zero_count += 1\n",
+    "\n",
+    "# Вывод результатов\n",
+    "print(f\"Положительных чисел: {positive_count}\")\n",
+    "print(f\"Отрицательных чисел: {negative_count}\")\n",
+    "print(f\"Нулей: {zero_count}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "579d3d11-9907-40cd-8aa4-23caed896393",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Введите 10 целых чисел:\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Число 1:  12\n",
+      "Число 2:  23\n",
+      "Число 3:  1\n",
+      "Число 4:  3\n",
+      "Число 5:  4\n",
+      "Число 6:  1\n",
+      "Число 7:  35\n",
+      "Число 8:  46\n",
+      "Число 9:  32\n",
+      "Число 10:  39\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Наибольшее число: 46\n",
+      "Наименьшее число: 1\n",
+      "Разница между наибольшим и наименьшим: 45\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Инициализация переменных для хранения максимума и минимума\n",
+    "# Используем None, чтобы правильно обработать первое введенное число\n",
+    "max_num = None\n",
+    "min_num = None\n",
+    "\n",
+    "print(\"Введите 10 целых чисел:\")\n",
+    "\n",
+    "for i in range(10):\n",
+    "    num = int(input(f\"Число {i + 1}: \"))\n",
+    "    \n",
+    "    # Для первого числа устанавливаем и максимум, и минимум равными ему\n",
+    "    if max_num is None or num > max_num:\n",
+    "        max_num = num\n",
+    "        \n",
+    "    if min_num is None or num < min_num:\n",
+    "        min_num = num\n",
+    "\n",
+    "# Вычисление разницы\n",
+    "difference = max_num - min_num\n",
+    "\n",
+    "# Вывод результатов\n",
+    "print(f\"Наибольшее число: {max_num}\")\n",
+    "print(f\"Наименьшее число: {min_num}\")\n",
+    "print(f\"Разница между наибольшим и наименьшим: {difference}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "8deb4187-f9af-4d7d-8c07-928114edd513",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Введите 10 целых чисел:\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Число 1:  23\n",
+      "Число 2:  21\n",
+      "Число 3:  6\n",
+      "Число 4:  45\n",
+      "Число 5:  27\n",
+      "Число 6:  2\n",
+      "Число 7:  7\n",
+      "Число 8:  64\n",
+      "Число 9:  6\n",
+      "Число 10:  67\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Массив: [23, 21, 6, 45, 27, 2, 7, 64, 6, 67]\n",
+      "Максимальный элемент: 67\n",
+      "Количество чисел, равных максимальному: 1\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Создаем пустой список для хранения чисел\n",
+    "A = []\n",
+    "\n",
+    "print(\"Введите 10 целых чисел:\")\n",
+    "for i in range(10):\n",
+    "    num = int(input(f\"Число {i + 1}: \"))\n",
+    "    A.append(num)\n",
+    "\n",
+    "# Находим максимальный элемент в массиве\n",
+    "max_element = max(A)\n",
+    "\n",
+    "# Подсчитываем количество элементов, равных максимальному\n",
+    "count_max = 0\n",
+    "for num in A:\n",
+    "    if num == max_element:\n",
+    "        count_max += 1\n",
+    "\n",
+    "# Вывод результата\n",
+    "print(f\"Массив: {A}\")\n",
+    "print(f\"Максимальный элемент: {max_element}\")\n",
+    "print(f\"Количество чисел, равных максимальному: {count_max}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "31a39639-6dba-4387-b6c7-ab870a2a51ad",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Введите 10 целых чисел:\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Элемент с индексом 0:  32\n",
+      "Элемент с индексом 1:  34\n",
+      "Элемент с индексом 2:  23\n",
+      "Элемент с индексом 3:  13\n",
+      "Элемент с индексом 4:  34\n",
+      "Элемент с индексом 5:  36\n",
+      "Элемент с индексом 6:  45\n",
+      "Элемент с индексом 7:  25\n",
+      "Элемент с индексом 8:  50\n",
+      "Элемент с индексом 9:  12\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Массив: [32, 34, 23, 13, 34, 36, 45, 25, 50, 12]\n",
+      "Сумма элементов с четными индексами: 184\n",
+      "Сумма элементов с нечетными индексами: 120\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Инициализация списка и переменных для сумм\n",
+    "A = []\n",
+    "sum_even_indices = 0  # Сумма элементов с четными индексами (0, 2, 4...)\n",
+    "sum_odd_indices = 0   # Сумма элементов с нечетными индексами (1, 3, 5...)\n",
+    "\n",
+    "print(\"Введите 10 целых чисел:\")\n",
+    "\n",
+    "for i in range(10):\n",
+    "    num = int(input(f\"Элемент с индексом {i}: \"))\n",
+    "    A.append(num)\n",
+    "    \n",
+    "    # Проверяем четность индекса\n",
+    "    if i % 2 == 0:\n",
+    "        sum_even_indices += num\n",
+    "    else:\n",
+    "        sum_odd_indices += num\n",
+    "\n",
+    "# Вычисляем разницу\n",
+    "difference = sum_even_indices - sum_odd_indices\n",
+    "\n",
+    "# Вывод результатов\n",
+    "print(f\"Массив: {A}\")\n",
+    "print(f\"Сумма элементов с четными индексами: {sum_even_indices}\")\n",
+    "print(f\"Сумма элементов с нечетными индексами: {sum_odd_indices}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "c1cdcc07-fe0d-4a53-a848-b22bbd371cfb",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите текст:  Привет 3 \n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Количество арабских цифр в тексте: 1\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод текста от пользователя\n",
+    "text = input(\"Введите текст: \")\n",
+    "\n",
+    "# Инициализация счетчика\n",
+    "count_digits = 0\n",
+    "\n",
+    "# Проходим по каждому символу в тексте\n",
+    "for char in text:\n",
+    "    # Проверка, является ли символ цифрой\n",
+    "    if char.isdigit():\n",
+    "        count_digits += 1\n",
+    "\n",
+    "# Вывод результата\n",
+    "print(f\"Количество арабских цифр в тексте: {count_digits}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "8c25e7fc-3c14-4c32-b80e-d404a47667ad",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите строку:  моя жизнь\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Строка без пробелов: мояжизнь\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод строки от пользователя\n",
+    "text = input(\"Введите строку: \")\n",
+    "\n",
+    "# Удаление всех пробелов\n",
+    "# Метод replace заменяет все вхождения первого аргумента на второй\n",
+    "text_without_spaces = text.replace(\" \", \"\")\n",
+    "\n",
+    "# Вывод результата\n",
+    "print(\"Строка без пробелов:\", text_without_spaces)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "c4d3c526-d41a-49cb-a70a-b5c582b33bae",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите строку:  у меня болит голова\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Первое слово: у\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод строки от пользователя\n",
+    "text = input(\"Введите строку: \")\n",
+    "\n",
+    "# Разбиваем строку на слова. \n",
+    "# split() без аргументов автоматически игнорирует несколько пробелов, табуляции и переводы строк\n",
+    "words = text.split()\n",
+    "\n",
+    "# Проверяем, есть ли слова в строке (защита от пустого ввода)\n",
+    "if words:\n",
+    "    print(\"Первое слово:\", words[0])\n",
+    "else:\n",
+    "    print(\"Вы не ввели ни одного слова.\")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "375fe6ad-f8f3-49bd-9976-65a99599c678",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите текст для записи в файл:  природа животных\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Текст успешно записан в файл 'output.txt'\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Ввод текста от пользователя\n",
+    "text = input(\"Введите текст для записи в файл: \")\n",
+    "\n",
+    "# Имя файла\n",
+    "filename = \"output.txt\"\n",
+    "\n",
+    "# Запись текста в файл\n",
+    "# 'w' (write) означает режим записи. Если файла нет, он создастся.\n",
+    "# Если файл есть, его содержимое будет перезаписано.\n",
+    "# encoding='utf-8' нужен для корректной работы с русским языком\n",
+    "with open(filename, 'w', encoding='utf-8') as file:\n",
+    "    file.write(text)\n",
+    "\n",
+    "print(f\"Текст успешно записан в файл '{filename}'\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "c539d7e9-6d30-4a23-9e25-6ddc269db97e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "🤖 Игра: Компьютер угадывает ваше число\n",
+      "----------------------------------------\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Введите нижнюю границу диапазона N:  2\n",
+      "Введите верхнюю границу диапазона M:  15\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "🔹 Загадайте число от 2 до 15.\n",
+      "🔹 Отвечайте честно. Можно использовать: да/y/1 или нет/n/0\n",
+      "----------------------------------------\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "❓ Вопрос 1: Ваше число больше 8? (да/нет):  нет\n",
+      "❓ Вопрос 2: Ваше число больше 5? (да/нет):  да\n",
+      "❓ Вопрос 3: Ваше число больше 7? (да/нет):  нет\n",
+      "❓ Вопрос 4: Ваше число больше 6? (да/нет):  да\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "========================================\n",
+      "✅ Я угадал! Ваше число: 7\n",
+      "📊 Использовано вопросов: 4\n",
+      "📏 Теоретический минимум для этого диапазона: 1 (бинарный поиск)\n",
+      "========================================\n"
+     ]
+    }
+   ],
+   "source": [
+    "def get_yes_no(prompt: str) -> bool:\n",
+    "    \"\"\"Запрашивает ответ 'да'/'нет', принимая разные варианты ввода.\"\"\"\n",
+    "    while True:\n",
+    "        ans = input(prompt).strip().lower()\n",
+    "        if ans in ('да', 'y', 'yes', '1', 'д'):\n",
+    "            return True\n",
+    "        elif ans in ('нет', 'n', 'no', '0', 'н'):\n",
+    "            return False\n",
+    "        print(\"⚠️ Пожалуйста, введите 'да' или 'нет'.\")\n",
+    "\n",
+    "def play_game():\n",
+    "    print(\"🤖 Игра: Компьютер угадывает ваше число\")\n",
+    "    print(\"-\" * 40)\n",
+    "    \n",
+    "    try:\n",
+    "        n = int(input(\"Введите нижнюю границу диапазона N: \"))\n",
+    "        m = int(input(\"Введите верхнюю границу диапазона M: \"))\n",
+    "    except ValueError:\n",
+    "        print(\"❌ Ошибка: введите целые числа.\")\n",
+    "        return\n",
+    "\n",
+    "    if n >= m:\n",
+    "        print(\"❌ Ошибка: N должно быть строго меньше M.\")\n",
+    "        return\n",
+    "\n",
+    "    low, high = n, m\n",
+    "    questions = 0\n",
+    "\n",
+    "    print(f\"\\n🔹 Загадайте число от {low} до {high}.\")\n",
+    "    print(\"🔹 Отвечайте честно. Можно использовать: да/y/1 или нет/n/0\")\n",
+    "    print(\"-\" * 40)\n",
+    "\n",
+    "    while low < high:\n",
+    "        mid = (low + high) // 2\n",
+    "        questions += 1\n",
+    "        \n",
+    "        is_greater = get_yes_no(f\"❓ Вопрос {questions}: Ваше число больше {mid}? (да/нет): \")\n",
+    "        \n",
+    "        if is_greater:\n",
+    "            low = mid + 1\n",
+    "        else:\n",
+    "            high = mid\n",
+    "\n",
+    "    print(\"\\n\" + \"=\" * 40)\n",
+    "    print(f\"✅ Я угадал! Ваше число: {low}\")\n",
+    "    print(f\"📊 Использовано вопросов: {questions}\")\n",
+    "    print(f\"📏 Теоретический минимум для этого диапазона: {len(bin(high - low)) - 2} (бинарный поиск)\")\n",
+    "    print(\"=\" * 40)\n",
+    "\n",
+    "if __name__ == \"__main__\":\n",
+    "    play_game()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1a9563f9-bd9e-42f2-ad10-a804f23d9135",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d34d36d1-8b8d-4d4f-bb50-2f4c85a6fc5a",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
+    </a>
