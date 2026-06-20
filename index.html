@@ -1,953 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Образовательный Портал | Alenaaa1235</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --sidebar-bg: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Навигация слева */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            padding: 0 20px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #475569;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-btn:hover { background: #f1f5f9; color: var(--primary); }
+        .nav-btn.active {
+            background: #eff6ff;
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .section { display: none; max-width: 1000px; margin: 0 auto; }
+        .section.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { margin-bottom: 20px; color: #0f172a; }
+
+        /* Стили для Кроссворда (из вашего файла) */
+        .cw-layout { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+        .cw-panel { 
+            flex: 1; min-width: 280px; max-width: 350px; 
+            background: white; padding: 20px; border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+        }
+        .cw-grid-wrapper { 
+            background: white; padding: 15px; border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); overflow-x: auto; 
+        }
+        .cw-table { border-collapse: collapse; margin: 0 auto; }
+        .cw-table td {
+            width: 38px; height: 38px; border: 1px solid #cbd5e1; position: relative; padding: 0;
+        }
+        .cw-table td.empty { background-color: #f1f5f9; border-color: #e2e8f0; }
+        .cw-table input {
+            width: 100%; height: 100%; border: none; text-align: center;
+            font-size: 1.1rem; font-weight: bold; text-transform: uppercase; outline: none;
+        }
+        .cw-table input:focus { background-color: #dbeafe; }
+        .cw-table input.correct { background-color: #dcfce7 !important; color: #166534; }
+        .cw-table input.incorrect { background-color: #fee2e2 !important; color: #991b1b; }
+        .cw-num { position: absolute; top: 2px; left: 3px; font-size: 9px; color: #64748b; pointer-events: none; }
+        
+        .cw-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-danger { background: #ef4444; color: white; }
+
+        /* Стили для Python-калькуляторов */
+        .calc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .calc-card {
+            background: white; padding: 20px; border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid var(--border);
+        }
+        .calc-card h3 { font-size: 1rem; margin-bottom: 15px; color: var(--primary); }
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 0.85rem; margin-bottom: 4px; color: #64748b; }
+        .input-group input {
+            width: 100%; padding: 8px; border: 1px solid var(--border);
+            border-radius: 6px; font-size: 0.95rem; outline: none;
+        }
+        .input-group input:focus { border-color: var(--primary); }
+        .result-box {
+            margin-top: 15px; padding: 10px; background: #f8fafc;
+            border-radius: 6px; font-size: 0.9rem; min-height: 20px; word-break: break-all;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            body { flex-direction: column; height: auto; overflow: auto; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 10px 0; }
+            .nav-btn { display: inline-block; padding: 8px 15px; border-left: none; border-bottom: 3px solid transparent; }
+            .nav-btn.active { border-left: none; border-bottom-color: var(--primary); }
+            .cw-layout { flex-direction: column; align-items: center; }
+            .cw-panel { max-width: 100%; width: 100%; }
+        }
+    </style>
+</head>
 <body>
-<a hret="Alenaaa1235.github.io"N</a>
-</body>{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "id": "82ebd430-76c1-436c-8a5d-89288acc9d73",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите длину стороны квадрата:  5\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Площадь квадрата: 25.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод длины стороны квадрата\n",
-    "side = float(input(\"Введите длину стороны квадрата: \"))\n",
-    "\n",
-    "# Вычисление площади\n",
-    "area = side * side\n",
-    "\n",
-    "# Вывод результата\n",
-    "print(\"Площадь квадрата:\", area)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "id": "ba6b1ff2-c144-440d-995a-4ea86a5271df",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите длину первой стороны:  10\n",
-      "Введите длину второй стороны:  5\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Площадь прямоугольника: 50.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод длин сторон прямоугольника\n",
-    "a = float(input(\"Введите длину первой стороны: \"))\n",
-    "b = float(input(\"Введите длину второй стороны: \"))\n",
-    "\n",
-    "# Вычисление площади\n",
-    "area = a * b\n",
-    "\n",
-    "# Вывод результата\n",
-    "print(\"Площадь прямоугольника:\", area)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 4,
-   "id": "5113d464-76c1-4ae7-aba4-f01c958b2a39",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите первое число:  5\n",
-      "Введите второе число:  9\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Среднее арифметическое: 7.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод двух чисел\n",
-    "num1 = float(input(\"Введите первое число: \"))\n",
-    "num2 = float(input(\"Введите второе число: \"))\n",
-    "\n",
-    "# Вычисление среднего арифметического\n",
-    "average = (num1 + num2) / 2\n",
-    "\n",
-    "# Вывод результата\n",
-    "print(\"Среднее арифметическое:\", average)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 5,
-   "id": "1d156cb3-6565-43e8-8baf-28ac1121905f",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите первое число:  8\n",
-      "Введите второе число:  12\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Среднее арифметическое: 10.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод двух чисел от пользователя\n",
-    "num1 = float(input(\"Введите первое число: \"))\n",
-    "num2 = float(input(\"Введите второе число: \"))\n",
-    "\n",
-    "# Вычисление среднего арифметического\n",
-    "average = (num1 + num2) / 2\n",
-    "\n",
-    "# Вывод результата\n",
-    "print(\"Среднее арифметическое:\", average)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 8,
-   "id": "44baa27e-d256-4333-bec3-9ad3b6889fa3",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите длину первого катета:  25\n",
-      "Введите длину второго катета:  5\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Гипотенуза: 25.495097567963924\n",
-      "Площадь: 62.5\n"
-     ]
-    }
-   ],
-   "source": [
-    "import math\n",
-    "\n",
-    "# Ввод длин катетов\n",
-    "a = float(input(\"Введите длину первого катета: \"))\n",
-    "b = float(input(\"Введите длину второго катета: \"))\n",
-    "\n",
-    "# Вычисление гипотенузы по теореме Пифагора: c = sqrt(a^2 + b^2)\n",
-    "hypotenuse = math.sqrt(a**2 + b**2)\n",
-    "\n",
-    "# Вычисление площади: S = (a * b) / 2\n",
-    "area = (a * b) / 2\n",
-    "\n",
-    "# Вывод результатов\n",
-    "print(f\"Гипотенуза: {hypotenuse}\")\n",
-    "print(f\"Площадь: {area}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 9,
-   "id": "43970e07-aa28-4ed5-8967-16cde281e464",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите число N:  23\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "484, 529, 576\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод числа N\n",
-    "n = int(input(\"Введите число N: \"))\n",
-    "\n",
-    "# Вычисление квадратов\n",
-    "val1 = (n - 1) ** 2\n",
-    "val2 = n ** 2\n",
-    "val3 = (n + 1) ** 2\n",
-    "\n",
-    "# Вывод через запятую\n",
-    "print(f\"{val1}, {val2}, {val3}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 10,
-   "id": "ee24101e-ef68-46b2-a436-f0ed529ff342",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите год:  1999\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Год не високосный\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод года\n",
-    "year = int(input(\"Введите год: \"))\n",
-    "\n",
-    "# Проверка на високосный год\n",
-    "if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):\n",
-    "    print(\"Год високосный\")\n",
-    "else:\n",
-    "    print(\"Год не високосный\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 11,
-   "id": "5ee82296-1841-4021-ae34-baf74e713004",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите целое число:  30\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Число четное\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод целого числа\n",
-    "number = int(input(\"Введите целое число: \"))\n",
-    "\n",
-    "# Проверка на четность с помощью оператора остатка от деления (%)\n",
-    "if number % 2 == 0:\n",
-    "    print(\"Число четное\")\n",
-    "else:\n",
-    "    print(\"Число нечетное\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 12,
-   "id": "082cca46-1e55-4abc-92b5-52bbecc6c6a9",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите первое число:  21\n",
-      "Введите второе число:  12\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Первое число не меньше второго. Разность: 9.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод двух чисел\n",
-    "num1 = float(input(\"Введите первое число: \"))\n",
-    "num2 = float(input(\"Введите второе число: \"))\n",
-    "\n",
-    "# Проверка условия\n",
-    "if num1 < num2:\n",
-    "    # Если первое меньше второго, вычисляем сумму\n",
-    "    result = num1 + num2\n",
-    "    print(f\"Первое число меньше второго. Сумма: {result}\")\n",
-    "else:\n",
-    "    # Иначе (если первое больше или равно второму) вычисляем разность\n",
-    "    result = num1 - num2\n",
-    "    print(f\"Первое число не меньше второго. Разность: {result}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 13,
-   "id": "b38ebd7e-b160-4ae8-bc66-4fc66c481431",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Первые 16 степеней числа 2:\n",
-      "2^0 = 1\n",
-      "2^1 = 2\n",
-      "2^2 = 4\n",
-      "2^3 = 8\n",
-      "2^4 = 16\n",
-      "2^5 = 32\n",
-      "2^6 = 64\n",
-      "2^7 = 128\n",
-      "2^8 = 256\n",
-      "2^9 = 512\n",
-      "2^10 = 1024\n",
-      "2^11 = 2048\n",
-      "2^12 = 4096\n",
-      "2^13 = 8192\n",
-      "2^14 = 16384\n",
-      "2^15 = 32768\n"
-     ]
-    }
-   ],
-   "source": [
-    "print(\"Первые 16 степеней числа 2:\")\n",
-    "for i in range(16):\n",
-    "    print(f\"2^{i} = {2 ** i}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 14,
-   "id": "b70a7e6f-a62d-4644-88c3-aab588aab6f4",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Введите 10 целых чисел:\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Число 1:  3\n",
-      "Число 2:  7\n",
-      "Число 3:  8\n",
-      "Число 4:  4\n",
-      "Число 5:  6\n",
-      "Число 6:  63\n",
-      "Число 7:  40\n",
-      "Число 8:  54\n",
-      "Число 9:  45\n",
-      "Число 10:  45\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Количество четных чисел: 5\n"
-     ]
-    }
-   ],
-   "source": [
-    "count_even = 0  # Счетчик четных чисел\n",
-    "\n",
-    "print(\"Введите 10 целых чисел:\")\n",
-    "\n",
-    "for i in range(10):\n",
-    "    num = int(input(f\"Число {i + 1}: \"))\n",
-    "    if num % 2 == 0:\n",
-    "        count_even += 1\n",
-    "\n",
-    "print(f\"Количество четных чисел: {count_even}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 17,
-   "id": "adc99e06-d3c6-46ab-8d99-79362d0c8cf8",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Введите 10 целых чисел:\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Число 1:  -3\n",
-      "Число 2:  0\n",
-      "Число 3:  237\n",
-      "Число 4:  29\n",
-      "Число 5:  -9\n",
-      "Число 6:  -63\n",
-      "Число 7:  89\n",
-      "Число 8:  0\n",
-      "Число 9:  27\n",
-      "Число 10:  -4\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Положительных чисел: 4\n",
-      "Отрицательных чисел: 4\n",
-      "Нулей: 2\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Инициализация счетчиков\n",
-    "positive_count = 0\n",
-    "negative_count = 0\n",
-    "zero_count = 0\n",
-    "\n",
-    "print(\"Введите 10 целых чисел:\")\n",
-    "\n",
-    "for i in range(10):\n",
-    "    num = int(input(f\"Число {i + 1}: \"))\n",
-    "    \n",
-    "    if num > 0:\n",
-    "        positive_count += 1\n",
-    "    elif num < 0:\n",
-    "        negative_count += 1\n",
-    "    else:\n",
-    "        zero_count += 1\n",
-    "\n",
-    "# Вывод результатов\n",
-    "print(f\"Положительных чисел: {positive_count}\")\n",
-    "print(f\"Отрицательных чисел: {negative_count}\")\n",
-    "print(f\"Нулей: {zero_count}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 18,
-   "id": "579d3d11-9907-40cd-8aa4-23caed896393",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Введите 10 целых чисел:\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Число 1:  12\n",
-      "Число 2:  23\n",
-      "Число 3:  1\n",
-      "Число 4:  3\n",
-      "Число 5:  4\n",
-      "Число 6:  1\n",
-      "Число 7:  35\n",
-      "Число 8:  46\n",
-      "Число 9:  32\n",
-      "Число 10:  39\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Наибольшее число: 46\n",
-      "Наименьшее число: 1\n",
-      "Разница между наибольшим и наименьшим: 45\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Инициализация переменных для хранения максимума и минимума\n",
-    "# Используем None, чтобы правильно обработать первое введенное число\n",
-    "max_num = None\n",
-    "min_num = None\n",
-    "\n",
-    "print(\"Введите 10 целых чисел:\")\n",
-    "\n",
-    "for i in range(10):\n",
-    "    num = int(input(f\"Число {i + 1}: \"))\n",
-    "    \n",
-    "    # Для первого числа устанавливаем и максимум, и минимум равными ему\n",
-    "    if max_num is None or num > max_num:\n",
-    "        max_num = num\n",
-    "        \n",
-    "    if min_num is None or num < min_num:\n",
-    "        min_num = num\n",
-    "\n",
-    "# Вычисление разницы\n",
-    "difference = max_num - min_num\n",
-    "\n",
-    "# Вывод результатов\n",
-    "print(f\"Наибольшее число: {max_num}\")\n",
-    "print(f\"Наименьшее число: {min_num}\")\n",
-    "print(f\"Разница между наибольшим и наименьшим: {difference}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 21,
-   "id": "8deb4187-f9af-4d7d-8c07-928114edd513",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Введите 10 целых чисел:\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Число 1:  23\n",
-      "Число 2:  21\n",
-      "Число 3:  6\n",
-      "Число 4:  45\n",
-      "Число 5:  27\n",
-      "Число 6:  2\n",
-      "Число 7:  7\n",
-      "Число 8:  64\n",
-      "Число 9:  6\n",
-      "Число 10:  67\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Массив: [23, 21, 6, 45, 27, 2, 7, 64, 6, 67]\n",
-      "Максимальный элемент: 67\n",
-      "Количество чисел, равных максимальному: 1\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Создаем пустой список для хранения чисел\n",
-    "A = []\n",
-    "\n",
-    "print(\"Введите 10 целых чисел:\")\n",
-    "for i in range(10):\n",
-    "    num = int(input(f\"Число {i + 1}: \"))\n",
-    "    A.append(num)\n",
-    "\n",
-    "# Находим максимальный элемент в массиве\n",
-    "max_element = max(A)\n",
-    "\n",
-    "# Подсчитываем количество элементов, равных максимальному\n",
-    "count_max = 0\n",
-    "for num in A:\n",
-    "    if num == max_element:\n",
-    "        count_max += 1\n",
-    "\n",
-    "# Вывод результата\n",
-    "print(f\"Массив: {A}\")\n",
-    "print(f\"Максимальный элемент: {max_element}\")\n",
-    "print(f\"Количество чисел, равных максимальному: {count_max}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 22,
-   "id": "31a39639-6dba-4387-b6c7-ab870a2a51ad",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Введите 10 целых чисел:\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Элемент с индексом 0:  32\n",
-      "Элемент с индексом 1:  34\n",
-      "Элемент с индексом 2:  23\n",
-      "Элемент с индексом 3:  13\n",
-      "Элемент с индексом 4:  34\n",
-      "Элемент с индексом 5:  36\n",
-      "Элемент с индексом 6:  45\n",
-      "Элемент с индексом 7:  25\n",
-      "Элемент с индексом 8:  50\n",
-      "Элемент с индексом 9:  12\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Массив: [32, 34, 23, 13, 34, 36, 45, 25, 50, 12]\n",
-      "Сумма элементов с четными индексами: 184\n",
-      "Сумма элементов с нечетными индексами: 120\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Инициализация списка и переменных для сумм\n",
-    "A = []\n",
-    "sum_even_indices = 0  # Сумма элементов с четными индексами (0, 2, 4...)\n",
-    "sum_odd_indices = 0   # Сумма элементов с нечетными индексами (1, 3, 5...)\n",
-    "\n",
-    "print(\"Введите 10 целых чисел:\")\n",
-    "\n",
-    "for i in range(10):\n",
-    "    num = int(input(f\"Элемент с индексом {i}: \"))\n",
-    "    A.append(num)\n",
-    "    \n",
-    "    # Проверяем четность индекса\n",
-    "    if i % 2 == 0:\n",
-    "        sum_even_indices += num\n",
-    "    else:\n",
-    "        sum_odd_indices += num\n",
-    "\n",
-    "# Вычисляем разницу\n",
-    "difference = sum_even_indices - sum_odd_indices\n",
-    "\n",
-    "# Вывод результатов\n",
-    "print(f\"Массив: {A}\")\n",
-    "print(f\"Сумма элементов с четными индексами: {sum_even_indices}\")\n",
-    "print(f\"Сумма элементов с нечетными индексами: {sum_odd_indices}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 23,
-   "id": "c1cdcc07-fe0d-4a53-a848-b22bbd371cfb",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите текст:  Привет 3 \n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Количество арабских цифр в тексте: 1\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод текста от пользователя\n",
-    "text = input(\"Введите текст: \")\n",
-    "\n",
-    "# Инициализация счетчика\n",
-    "count_digits = 0\n",
-    "\n",
-    "# Проходим по каждому символу в тексте\n",
-    "for char in text:\n",
-    "    # Проверка, является ли символ цифрой\n",
-    "    if char.isdigit():\n",
-    "        count_digits += 1\n",
-    "\n",
-    "# Вывод результата\n",
-    "print(f\"Количество арабских цифр в тексте: {count_digits}\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 24,
-   "id": "8c25e7fc-3c14-4c32-b80e-d404a47667ad",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите строку:  моя жизнь\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Строка без пробелов: мояжизнь\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод строки от пользователя\n",
-    "text = input(\"Введите строку: \")\n",
-    "\n",
-    "# Удаление всех пробелов\n",
-    "# Метод replace заменяет все вхождения первого аргумента на второй\n",
-    "text_without_spaces = text.replace(\" \", \"\")\n",
-    "\n",
-    "# Вывод результата\n",
-    "print(\"Строка без пробелов:\", text_without_spaces)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 25,
-   "id": "c4d3c526-d41a-49cb-a70a-b5c582b33bae",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите строку:  у меня болит голова\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Первое слово: у\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод строки от пользователя\n",
-    "text = input(\"Введите строку: \")\n",
-    "\n",
-    "# Разбиваем строку на слова. \n",
-    "# split() без аргументов автоматически игнорирует несколько пробелов, табуляции и переводы строк\n",
-    "words = text.split()\n",
-    "\n",
-    "# Проверяем, есть ли слова в строке (защита от пустого ввода)\n",
-    "if words:\n",
-    "    print(\"Первое слово:\", words[0])\n",
-    "else:\n",
-    "    print(\"Вы не ввели ни одного слова.\")\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 26,
-   "id": "375fe6ad-f8f3-49bd-9976-65a99599c678",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите текст для записи в файл:  природа животных\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Текст успешно записан в файл 'output.txt'\n"
-     ]
-    }
-   ],
-   "source": [
-    "# Ввод текста от пользователя\n",
-    "text = input(\"Введите текст для записи в файл: \")\n",
-    "\n",
-    "# Имя файла\n",
-    "filename = \"output.txt\"\n",
-    "\n",
-    "# Запись текста в файл\n",
-    "# 'w' (write) означает режим записи. Если файла нет, он создастся.\n",
-    "# Если файл есть, его содержимое будет перезаписано.\n",
-    "# encoding='utf-8' нужен для корректной работы с русским языком\n",
-    "with open(filename, 'w', encoding='utf-8') as file:\n",
-    "    file.write(text)\n",
-    "\n",
-    "print(f\"Текст успешно записан в файл '{filename}'\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 30,
-   "id": "c539d7e9-6d30-4a23-9e25-6ddc269db97e",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "🤖 Игра: Компьютер угадывает ваше число\n",
-      "----------------------------------------\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "Введите нижнюю границу диапазона N:  2\n",
-      "Введите верхнюю границу диапазона M:  15\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "🔹 Загадайте число от 2 до 15.\n",
-      "🔹 Отвечайте честно. Можно использовать: да/y/1 или нет/n/0\n",
-      "----------------------------------------\n"
-     ]
-    },
-    {
-     "name": "stdin",
-     "output_type": "stream",
-     "text": [
-      "❓ Вопрос 1: Ваше число больше 8? (да/нет):  нет\n",
-      "❓ Вопрос 2: Ваше число больше 5? (да/нет):  да\n",
-      "❓ Вопрос 3: Ваше число больше 7? (да/нет):  нет\n",
-      "❓ Вопрос 4: Ваше число больше 6? (да/нет):  да\n"
-     ]
-    },
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "========================================\n",
-      "✅ Я угадал! Ваше число: 7\n",
-      "📊 Использовано вопросов: 4\n",
-      "📏 Теоретический минимум для этого диапазона: 1 (бинарный поиск)\n",
-      "========================================\n"
-     ]
-    }
-   ],
-   "source": [
-    "def get_yes_no(prompt: str) -> bool:\n",
-    "    \"\"\"Запрашивает ответ 'да'/'нет', принимая разные варианты ввода.\"\"\"\n",
-    "    while True:\n",
-    "        ans = input(prompt).strip().lower()\n",
-    "        if ans in ('да', 'y', 'yes', '1', 'д'):\n",
-    "            return True\n",
-    "        elif ans in ('нет', 'n', 'no', '0', 'н'):\n",
-    "            return False\n",
-    "        print(\"⚠️ Пожалуйста, введите 'да' или 'нет'.\")\n",
-    "\n",
-    "def play_game():\n",
-    "    print(\"🤖 Игра: Компьютер угадывает ваше число\")\n",
-    "    print(\"-\" * 40)\n",
-    "    \n",
-    "    try:\n",
-    "        n = int(input(\"Введите нижнюю границу диапазона N: \"))\n",
-    "        m = int(input(\"Введите верхнюю границу диапазона M: \"))\n",
-    "    except ValueError:\n",
-    "        print(\"❌ Ошибка: введите целые числа.\")\n",
-    "        return\n",
-    "\n",
-    "    if n >= m:\n",
-    "        print(\"❌ Ошибка: N должно быть строго меньше M.\")\n",
-    "        return\n",
-    "\n",
-    "    low, high = n, m\n",
-    "    questions = 0\n",
-    "\n",
-    "    print(f\"\\n🔹 Загадайте число от {low} до {high}.\")\n",
-    "    print(\"🔹 Отвечайте честно. Можно использовать: да/y/1 или нет/n/0\")\n",
-    "    print(\"-\" * 40)\n",
-    "\n",
-    "    while low < high:\n",
-    "        mid = (low + high) // 2\n",
-    "        questions += 1\n",
-    "        \n",
-    "        is_greater = get_yes_no(f\"❓ Вопрос {questions}: Ваше число больше {mid}? (да/нет): \")\n",
-    "        \n",
-    "        if is_greater:\n",
-    "            low = mid + 1\n",
-    "        else:\n",
-    "            high = mid\n",
-    "\n",
-    "    print(\"\\n\" + \"=\" * 40)\n",
-    "    print(f\"✅ Я угадал! Ваше число: {low}\")\n",
-    "    print(f\"📊 Использовано вопросов: {questions}\")\n",
-    "    print(f\"📏 Теоретический минимум для этого диапазона: {len(bin(high - low)) - 2} (бинарный поиск)\")\n",
-    "    print(\"=\" * 40)\n",
-    "\n",
-    "if __name__ == \"__main__\":\n",
-    "    play_game()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "1a9563f9-bd9e-42f2-ad10-a804f23d9135",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "d34d36d1-8b8d-4d4f-bb50-2f4c85a6fc5a",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.13.5"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
+
+    <!-- БОКОВАЯ ПАНЕЛЬ -->
+    <div class="sidebar">
+        <div class="logo">Alenaaa1235.github.io</div>
+        <button class="nav-btn active" onclick="showSection('crossword')">🧩 Кроссворд: Фармакология</button>
+        <button class="nav-btn" onclick="showSection('geometry')">📐 Геометрия и Числа</button>
+        <button class="nav-btn" onclick="showSection('arrays')">📊 Массивы и Строки</button>
+        <button class="nav-btn" onclick="showSection('game')">🎮 Игра: Угадай число</button>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="main-content">
+        
+        <!-- РАЗДЕЛ 1: КРОССВОРД -->
+        <div id="crossword" class="section active">
+            <h2>Интерактивный кроссворд по фармакологии</h2>
+            <div class="cw-layout">
+                <div class="cw-panel">
+                    <h3 style="color:var(--primary); border-bottom:2px solid #e2e8f0; padding-bottom:8px; margin-bottom:10px;">По горизонтали</h3>
+                    <div id="clues-h"></div>
+                    <h3 style="color:var(--primary); border-bottom:2px solid #e2e8f0; padding-bottom:8px; margin:20px 0 10px;">По вертикали</h3>
+                    <div id="clues-v"></div>
+                </div>
+                
+                <div class="cw-grid-wrapper">
+                    <table id="cw-table" class="cw-table"></table>
+                    <div class="cw-actions">
+                        <button class="btn btn-primary" onclick="checkCrossword()">Проверить ответы</button>
+                        <button class="btn btn-danger" onclick="resetCrossword()">Сбросить всё</button>
+                    </div>
+                </div>
+
+                <div class="cw-panel">
+                    <h3 style="color:var(--primary); margin-bottom:10px;">Слова для поиска</h3>
+                    <div id="word-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- РАЗДЕЛ 2: ГЕОМЕТРИЯ И ЧИСЛА -->
+        <div id="geometry" class="section">
+            <h2>Геометрия и базовые вычисления</h2>
+            <div class="calc-grid">
+                <!-- Площадь квадрата -->
+                <div class="calc-card">
+                    <h3>Площадь квадрата</h3>
+                    <div class="input-group"><label>Сторона:</label><input type="number" id="sq-side" oninput="calcSquare()"></div>
+                    <div class="result-box" id="res-square">Результат появится здесь</div>
+                </div>
+                <!-- Площадь прямоугольника -->
+                <div class="calc-card">
+                    <h3>Площадь прямоугольника</h3>
+                    <div class="input-group"><label>Сторона A:</label><input type="number" id="rect-a" oninput="calcRect()"></div>
+                    <div class="input-group"><label>Сторона B:</label><input type="number" id="rect-b" oninput="calcRect()"></div>
+                    <div class="result-box" id="res-rect">Результат появится здесь</div>
+                </div>
+                <!-- Среднее арифметическое -->
+                <div class="calc-card">
+                    <h3>Среднее арифметическое</h3>
+                    <div class="input-group"><label>Число 1:</label><input type="number" id="avg-1" oninput="calcAvg()"></div>
+                    <div class="input-group"><label>Число 2:</label><input type="number" id="avg-2" oninput="calcAvg()"></div>
+                    <div class="result-box" id="res-avg">Результат появится здесь</div>
+                </div>
+                <!-- Теорема Пифагора -->
+                <div class="calc-card">
+                    <h3>Теорема Пифагора</h3>
+                    <div class="input-group"><label>Катет A:</label><input type="number" id="pyth-a" oninput="calcPyth()"></div>
+                    <div class="input-group"><label>Катет B:</label><input type="number" id="pyth-b" oninput="calcPyth()"></div>
+                    <div class="result-box" id="res-pyth">Гипотенуза и площадь</div>
+                </div>
+                <!-- Високосный год -->
+                <div class="calc-card">
+                    <h3>Проверка високосного года</h3>
+                    <div class="input-group"><label>Год:</label><input type="number" id="leap-year" oninput="calcLeap()"></div>
+                    <div class="result-box" id="res-leap">Введите год</div>
+                </div>
+                <!-- Четность -->
+                <div class="calc-card">
+                    <h3>Четное или нечетное?</h3>
+                    <div class="input-group"><label>Целое число:</label><input type="number" id="even-num" oninput="calcEven()"></div>
+                    <div class="result-box" id="res-even">Введите число</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- РАЗДЕЛ 3: МАССИВЫ И СТРОКИ -->
+        <div id="arrays" class="section">
+            <h2>Работа с массивами и текстом</h2>
+            <div class="calc-grid">
+                <!-- Квадраты чисел -->
+                <div class="calc-card">
+                    <h3>Квадраты N-1, N, N+1</h3>
+                    <div class="input-group"><label>Число N:</label><input type="number" id="sq-n" oninput="calcSqN()"></div>
+                    <div class="result-box" id="res-sqn">Результат</div>
+                </div>
+                <!-- Сравнение двух чисел -->
+                <div class="calc-card">
+                    <h3>Сравнение двух чисел</h3>
+                    <div class="input-group"><label>Число 1:</label><input type="number" id="cmp-1" oninput="calcCmp()"></div>
+                    <div class="input-group"><label>Число 2:</label><input type="number" id="cmp-2" oninput="calcCmp()"></div>
+                    <div class="result-box" id="res-cmp">Результат</div>
+                </div>
+                <!-- Анализ строки -->
+                <div class="calc-card">
+                    <h3>Анализ текста</h3>
+                    <div class="input-group"><label>Введите текст:</label><input type="text" id="txt-analyze" oninput="analyzeText()"></div>
+                    <div class="result-box" id="res-txt">Цифры: 0 | Без пробелов: ...</div>
+                </div>
+                <!-- Степени двойки -->
+                <div class="calc-card">
+                    <h3>Первые 16 степеней числа 2</h3>
+                    <button class="btn btn-primary" onclick="showPowersOf2()" style="margin-bottom:10px;">Показать степени</button>
+                    <div class="result-box" id="res-pow2" style="max-height:200px; overflow-y:auto; white-space:pre-line;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- РАЗДЕЛ 4: ИГРА -->
+        <div id="game" class="section">
+            <h2>🤖 Компьютер угадывает ваше число</h2>
+            <div class="calc-card" style="max-width:500px;">
+                <p style="margin-bottom:15px; color:#475569;">Загадайте число, укажите диапазон, и компьютер найдет его методом бинарного поиска.</p>
+                <div class="input-group"><label>Нижняя граница (N):</label><input type="number" id="game-n" value="1"></div>
+                <div class="input-group"><label>Верхняя граница (M):</label><input type="number" id="game-m" value="100"></div>
+                <button class="btn btn-primary" onclick="startGame()" style="width:100%; margin-bottom:15px;">Начать игру</button>
+                <div id="game-area" style="display:none;">
+                    <div class="result-box" id="game-question" style="font-size:1.1rem; text-align:center; margin-bottom:10px;"></div>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn btn-primary" onclick="gameAnswer(true)" style="flex:1;">ДА / Больше</button>
+                        <button class="btn btn-danger" onclick="gameAnswer(false)" style="flex:1;">НЕТ / Не больше</button>
+                    </div>
+                    <div class="result-box" id="game-result" style="margin-top:15px; text-align:center;"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+/* ==========================================
+   НАВИГАЦИЯ ПО САЙТУ
+   ========================================== */
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
 }
-    </a>
+
+/* ==========================================
+   ЛОГИКА КРОССВОРДА (16x16, 10 слов)
+   ========================================== */
+const CW_SIZE = 16;
+const cwWords = [
+    { num:1, word:"АНТИГИПЕРТЕНЗИВ", dir:"H", r:0, c:0, clue:"Лекарство для снижения давления (15)" },
+    { num:2, word:"БЕТАБЛОКАТОР", dir:"V", r:0, c:2, clue:"Группа препаратов от давления (12)" },
+    { num:3, word:"АНТИБИОТИК", dir:"H", r:2, c:0, clue:"Препарат против бактерий (10)" },
+    { num:4, word:"ЦИТОСТАТИК", dir:"V", r:2, c:5, clue:"Препарат, подавляющий деление клеток (10)" },
+    { num:5, word:"ГОРМОН", dir:"H", r:4, c:0, clue:"Биологически активное вещество (6)" },
+    { num:6, word:"ВАКЦИНА", dir:"V", r:4, c:3, clue:"Препарат для формирования иммунитета (7)" },
+    { num:7, word:"АНАЛЬГЕТИК", dir:"H", r:6, c:0, clue:"Обезболивающее средство (10)" },
+    { num:8, word:"СЕДАТИВ", dir:"V", r:6, c:7, clue:"Успокоительное средство (7)" },
+    { num:9, word:"ДИУРЕТИК", dir:"H", r:8, c:0, clue:"Мочегонное средство (8)" },
+    { num:10, word:"АНТИДЕПРЕССАНТ", dir:"V", r:0, c:9, clue:"Препарат для лечения депрессии (14)" }
+];
+
+const cwGrid = Array(CW_SIZE).fill().map(() => Array(CW_SIZE).fill(null));
+
+cwWords.forEach(item => {
+    for (let i = 0; i < item.word.length; i++) {
+        let r = item.dir === 'H' ? item.r : item.r + i;
+        let c = item.dir === 'H' ? item.c + i : item.c;
+        if (r < CW_SIZE && c < CW_SIZE) {
+            if (!cwGrid[r][c]) cwGrid[r][c] = { letter: item.word[i], nums: [] };
+            if (i === 0) cwGrid[r][c].nums.push(item.num);
+        }
+    }
+});
+
+// Рендер кроссворда
+(function renderCrossword() {
+    const table = document.getElementById('cw-table');
+    const cluesH = document.getElementById('clues-h');
+    const cluesV = document.getElementById('clues-v');
+    const wordList = document.getElementById('word-list');
+
+    for (let r = 0; r < CW_SIZE; r++) {
+        const tr = document.createElement('tr');
+        for (let c = 0; c < CW_SIZE; c++) {
+            const td = document.createElement('td');
+            const cell = cwGrid[r][c];
+            if (cell) {
+                if (cell.nums.length > 0) {
+                    const span = document.createElement('span');
+                    span.className = 'cw-num';
+                    span.textContent = cell.nums.join(',');
+                    td.appendChild(span);
+                }
+                const inp = document.createElement('input');
+                inp.maxLength = 1;
+                inp.dataset.answer = cell.letter;
+                inp.dataset.r = r;
+                inp.dataset.c = c;
+                inp.addEventListener('input', e => {
+                    e.target.value = e.target.value.toUpperCase().replace(/[^А-ЯЁ]/g, '');
+                    e.target.classList.remove('correct','incorrect');
+                    if (e.target.value) moveNext(r, c);
+                });
+                inp.addEventListener('keydown', e => navCW(e, r, c));
+                td.appendChild(inp);
+            } else {
+                td.className = 'empty';
+            }
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+
+    cwWords.forEach(w => {
+        const d = document.createElement('div');
+        d.style.cssText = 'margin-bottom:8px;font-size:0.9rem;line-height:1.4;color:#334155;';
+        d.innerHTML = `<strong>${w.num}.</strong> ${w.clue}`;
+        (w.dir === 'H' ? cluesH : cluesV).appendChild(d);
+    });
+
+    cwWords.forEach(w => {
+        const t = document.createElement('span');
+        t.style.cssText = 'padding:4px 0;border-bottom:1px solid #f1f5f9;color:#475569;font-size:0.85rem;display:block;';
+        t.textContent = w.word;
+        wordList.appendChild(t);
+    });
+})();
+
+function moveNext(r, c) {
+    let n = document.querySelector(`input[data-r="${r}"][data-c="${c+1}"]`) ||
+            document.querySelector(`input[data-r="${r+1}"][data-c="${c}"]`);
+    if (n) n.focus();
+}
+
+function navCW(e, r, c) {
+    let sel;
+    if (e.key==='ArrowRight') sel=`input[data-r="${r}"][data-c="${c+1}"]`;
+    if (e.key==='ArrowLeft') sel=`input[data-r="${r}"][data-c="${c-1}"]`;
+    if (e.key==='ArrowDown') sel=`input[data-r="${r+1}"][data-c="${c}"]`;
+    if (e.key==='ArrowUp') sel=`input[data-r="${r-1}"][data-c="${c}"]`;
+    if (sel) { const el=document.querySelector(sel); if(el){e.preventDefault();el.focus();} }
+}
+
+function checkCrossword() {
+    let ok = 0, total = 0;
+    document.querySelectorAll('#cw-table input').forEach(inp => {
+        total++;
+        if (inp.value === inp.dataset.answer) { inp.classList.add('correct'); inp.classList.remove('incorrect'); ok++; }
+        else if (inp.value !== '') { inp.classList.add('incorrect'); inp.classList.remove('correct'); }
+        else { inp.classList.remove('correct','incorrect'); }
+    });
+    if (ok === total && total > 0) alert("🎉 Поздравляем! Кроссворд решен верно!");
+}
+
+function resetCrossword() {
+    document.querySelectorAll('#cw-table input').forEach(inp => {
+        inp.value = ''; inp.classList.remove('correct','incorrect');
+    });
+    document.querySelector('#cw-table input')?.focus();
+}
+
+/* ==========================================
+   КАЛЬКУЛЯТОРЫ (Python → JS)
+   ========================================== */
+function getVal(id) { return parseFloat(document.getElementById(id).value); }
+function setRes(id, text) { document.getElementById(id).textContent = text; }
+
+function calcSquare() {
+    const v = getVal('sq-side');
+    setRes('res-square', isNaN(v) ? 'Введите число' : `Площадь квадрата: ${(v*v).toFixed(2)}`);
+}
+
+function calcRect() {
+    const a = getVal('rect-a'), b = getVal('rect-b');
+    setRes('res-rect', (isNaN(a)||isNaN(b)) ? 'Введите оба числа' : `Площадь прямоугольника: ${(a*b).toFixed(2)}`);
+}
+
+function calcAvg() {
+    const a = getVal('avg-1'), b = getVal('avg-2');
+    setRes('res-avg', (isNaN(a)||isNaN(b)) ? 'Введите оба числа' : `Среднее арифметическое: ${((a+b)/2).toFixed(2)}`);
+}
+
+function calcPyth() {
+    const a = getVal('pyth-a'), b = getVal('pyth-b');
+    if (isNaN(a)||isNaN(b)) { setRes('res-pyth','Введите оба катета'); return; }
+    const hyp = Math.sqrt(a*a + b*b);
+    const area = (a*b)/2;
+    setRes('res-pyth', `Гипотенуза: ${hyp.toFixed(4)}\nПлощадь: ${area.toFixed(2)}`);
+}
+
+function calcLeap() {
+    const y = parseInt(document.getElementById('leap-year').value);
+    if (isNaN(y)) { setRes('res-leap','Введите год'); return; }
+    const isLeap = (y%4===0 && y%100!==0) || (y%400===0);
+    setRes('res-leap', isLeap ? '✅ Год високосный' : '❌ Год не високосный');
+}
+
+function calcEven() {
+    const n = parseInt(document.getElementById('even-num').value);
+    if (isNaN(n)) { setRes('res-even','Введите целое число'); return; }
+    setRes('res-even', n%2===0 ? '✅ Число четное' : '❌ Число нечетное');
+}
+
+function calcSqN() {
+    const n = parseInt(document.getElementById('sq-n').value);
+    if (isNaN(n)) { setRes('res-sqn','Введите N'); return; }
+    setRes('res-sqn', `${(n-1)**2}, ${n**2}, ${(n+1)**2}`);
+}
+
+function calcCmp() {
+    const a = getVal('cmp-1'), b = getVal('cmp-2');
+    if (isNaN(a)||isNaN(b)) { setRes('res-cmp','Введите оба числа'); return; }
+    if (a < b) setRes('res-cmp', `Первое меньше второго. Сумма: ${(a+b).toFixed(2)}`);
+    else setRes('res-cmp', `Первое не меньше второго. Разность: ${(a-b).toFixed(2)}`);
+}
+
+function analyzeText() {
+    const txt = document.getElementById('txt-analyze').value;
+    const digits = (txt.match(/\d/g) || []).length;
+    const noSpaces = txt.replace(/\s/g, '');
+    setRes('res-txt', `Цифр: ${digits}\nБез пробелов: ${noSpaces}`);
+}
+
+function showPowersOf2() {
+    let res = '';
+    for (let i = 0; i < 16; i++) res += `2^${i} = ${2**i}\n`;
+    setRes('res-pow2', res.trim());
+}
+
+/* ==========================================
+   ИГРА: КОМПЬЮТЕР УГАДЫВАЕТ ЧИСЛО
+   ========================================== */
+let gameLow, gameHigh, gameQuestions;
+
+function startGame() {
+    gameLow = parseInt(document.getElementById('game-n').value);
+    gameHigh = parseInt(document.getElementById('game-m').value);
+    gameQuestions = 0;
+
+    if (isNaN(gameLow) || isNaN(gameHigh) || gameLow >= gameHigh) {
+        alert('Ошибка: N должно быть строго меньше M');
+        return;
+    }
+
+    document.getElementById('game-area').style.display = 'block';
+    document.getElementById('game-result').textContent = '';
+    askQuestion();
+}
+
+function askQuestion() {
+    if (gameLow >= gameHigh) {
+        const minQ = Math.ceil(Math.log2(gameHigh - gameLow + 1)) || 0;
+        document.getElementById('game-question').textContent = '';
+        document.getElementById('game-result').innerHTML = 
+            `✅ Я угадал! Ваше число: <strong>${gameLow}</strong><br>` +
+            `📊 Вопросов: ${gameQuestions} | Минимум (бинарный поиск): ${minQ}`;
+        return;
+    }
+    const mid = Math.floor((gameLow + gameHigh) / 2);
+    gameQuestions++;
+    document.getElementById('game-question').textContent = `❓ Вопрос ${gameQuestions}: Ваше число больше ${mid}?`;
+}
+
+function gameAnswer(isGreater) {
+    if (isGreater) gameLow = Math.floor((gameLow + gameHigh) / 2) + 1;
+    else gameHigh = Math.floor((gameLow + gameHigh) / 2);
+    askQuestion();
+}
+</script>
+</body>
+</html>
