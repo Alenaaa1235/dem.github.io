@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Образовательный Портал | Alenaaa1235</title>
+    <title>Образовательный Портал | Alenaaa1235</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -24,15 +24,16 @@
             overflow: hidden;
         }
 
-        /* Навигация слева */
+        /* Навигация */
         .sidebar {
-            width: 260px;
+            width: 280px;
             background: var(--sidebar-bg);
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             padding: 20px 0;
             flex-shrink: 0;
+            z-index: 10;
         }
 
         .logo {
@@ -44,16 +45,28 @@
             margin-bottom: 10px;
         }
 
+        .nav-group-title {
+            padding: 15px 20px 5px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            font-weight: 700;
+        }
+
         .nav-btn {
             background: none;
             border: none;
             text-align: left;
-            padding: 12px 20px;
+            padding: 10px 20px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #475569;
             transition: all 0.2s;
             border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-btn:hover { background: #f1f5f9; color: var(--primary); }
@@ -72,14 +85,19 @@
             position: relative;
         }
 
-        .section { display: none; max-width: 1000px; margin: 0 auto; }
-        .section.active { display: block; animation: fadeIn 0.3s ease; }
+        .section { display: none; max-width: 1100px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+        .section.active { display: block; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { margin-bottom: 20px; color: #0f172a; }
+        h2 { margin-bottom: 20px; color: #0f172a; font-size: 1.5rem; }
+        .badge { 
+            display: inline-block; background: #e2e8f0; color: #475569; 
+            padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; 
+            font-weight: 600; margin-bottom: 20px; 
+        }
 
-        /* Стили для Кроссворда (из вашего файла) */
+        /* Общие стили для кроссвордов */
         .cw-layout { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
         .cw-panel { 
             flex: 1; min-width: 280px; max-width: 350px; 
@@ -92,12 +110,12 @@
         }
         .cw-table { border-collapse: collapse; margin: 0 auto; }
         .cw-table td {
-            width: 38px; height: 38px; border: 1px solid #cbd5e1; position: relative; padding: 0;
+            width: 36px; height: 36px; border: 1px solid #cbd5e1; position: relative; padding: 0;
         }
         .cw-table td.empty { background-color: #f1f5f9; border-color: #e2e8f0; }
         .cw-table input {
             width: 100%; height: 100%; border: none; text-align: center;
-            font-size: 1.1rem; font-weight: bold; text-transform: uppercase; outline: none;
+            font-size: 1rem; font-weight: bold; text-transform: uppercase; outline: none;
         }
         .cw-table input:focus { background-color: #dbeafe; }
         .cw-table input.correct { background-color: #dcfce7 !important; color: #166534; }
@@ -105,11 +123,11 @@
         .cw-num { position: absolute; top: 2px; left: 3px; font-size: 9px; color: #64748b; pointer-events: none; }
         
         .cw-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
-        .btn { padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem;}
         .btn-primary { background: var(--primary); color: white; }
         .btn-danger { background: #ef4444; color: white; }
 
-        /* Стили для Python-калькуляторов */
+        /* Стили для калькуляторов */
         .calc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .calc-card {
             background: white; padding: 20px; border-radius: 12px;
@@ -132,7 +150,7 @@
         @media (max-width: 900px) {
             body { flex-direction: column; height: auto; overflow: auto; }
             .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 10px 0; }
-            .nav-btn { display: inline-block; padding: 8px 15px; border-left: none; border-bottom: 3px solid transparent; }
+            .nav-btn { display: inline-flex; padding: 8px 15px; border-left: none; border-bottom: 3px solid transparent; }
             .nav-btn.active { border-left: none; border-bottom-color: var(--primary); }
             .cw-layout { flex-direction: column; align-items: center; }
             .cw-panel { max-width: 100%; width: 100%; }
@@ -144,120 +162,139 @@
     <!-- БОКОВАЯ ПАНЕЛЬ -->
     <div class="sidebar">
         <div class="logo">Alenaaa1235.github.io</div>
-        <button class="nav-btn active" onclick="showSection('crossword')">🧩 Кроссворд: Фармакология</button>
+        
+        <div class="nav-group-title">Кроссворды</div>
+        <button class="nav-btn active" onclick="showSection('cw-pharma')">🧬 Фармакология</button>
+        <button class="nav-btn" onclick="showSection('cw-anatomy')">🫀 Анатомия</button>
+        
+        <div class="nav-group-title">Инструменты</div>
         <button class="nav-btn" onclick="showSection('geometry')">📐 Геометрия и Числа</button>
         <button class="nav-btn" onclick="showSection('arrays')">📊 Массивы и Строки</button>
-        <button class="nav-btn" onclick="showSection('game')">🎮 Игра: Угадай число</button>
+        <button class="nav-btn" onclick="showSection('game')"> Угадай число</button>
     </div>
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="main-content">
         
-        <!-- РАЗДЕЛ 1: КРОССВОРД -->
-        <div id="crossword" class="section active">
-            <h2>Интерактивный кроссворд по фармакологии</h2>
+        <!-- КРОССВОРД: ФАРМАКОЛОГИЯ -->
+        <div id="cw-pharma" class="section active">
+            <h2>Кроссворд: Фармакология</h2>
+            <div class="badge">Сетка 16×16 | 10 слов</div>
             <div class="cw-layout">
                 <div class="cw-panel">
                     <h3 style="color:var(--primary); border-bottom:2px solid #e2e8f0; padding-bottom:8px; margin-bottom:10px;">По горизонтали</h3>
-                    <div id="clues-h"></div>
+                    <div id="pharma-clues-h"></div>
                     <h3 style="color:var(--primary); border-bottom:2px solid #e2e8f0; padding-bottom:8px; margin:20px 0 10px;">По вертикали</h3>
-                    <div id="clues-v"></div>
+                    <div id="pharma-clues-v"></div>
                 </div>
-                
                 <div class="cw-grid-wrapper">
-                    <table id="cw-table" class="cw-table"></table>
+                    <table id="pharma-cw-table" class="cw-table"></table>
                     <div class="cw-actions">
-                        <button class="btn btn-primary" onclick="checkCrossword()">Проверить ответы</button>
-                        <button class="btn btn-danger" onclick="resetCrossword()">Сбросить всё</button>
+                        <button class="btn btn-primary" onclick="checkCW('pharma')">Проверить</button>
+                        <button class="btn btn-danger" onclick="resetCW('pharma')">Сбросить</button>
                     </div>
                 </div>
-
                 <div class="cw-panel">
-                    <h3 style="color:var(--primary); margin-bottom:10px;">Слова для поиска</h3>
-                    <div id="word-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    <h3 style="color:var(--primary); margin-bottom:10px;">Слова</h3>
+                    <div id="pharma-word-list" style="display:flex; flex-direction:column; gap:6px;"></div>
                 </div>
             </div>
         </div>
 
-        <!-- РАЗДЕЛ 2: ГЕОМЕТРИЯ И ЧИСЛА -->
+        <!-- КРОССВОРД: АНАТОМИЯ -->
+        <div id="cw-anatomy" class="section">
+            <h2>Кроссворд: Анатомия</h2>
+            <div class="badge">Сетка 16×16 | 10 слов</div>
+            <div class="cw-layout">
+                <div class="cw-panel">
+                    <h3 style="color:var(--primary); border-bottom:2px solid #e2e8f0; padding-bottom:8px; margin-bottom:10px;">По горизонтали</h3>
+                    <div id="anatomy-clues-h"></div>
+                    <h3 style="color:var(--primary); border-bottom:2px solid #e2e8f0; padding-bottom:8px; margin:20px 0 10px;">По вертикали</h3>
+                    <div id="anatomy-clues-v"></div>
+                </div>
+                <div class="cw-grid-wrapper">
+                    <table id="anatomy-cw-table" class="cw-table"></table>
+                    <div class="cw-actions">
+                        <button class="btn btn-primary" onclick="checkCW('anatomy')">Проверить</button>
+                        <button class="btn btn-danger" onclick="resetCW('anatomy')">Сбросить</button>
+                    </div>
+                </div>
+                <div class="cw-panel">
+                    <h3 style="color:var(--primary); margin-bottom:10px;">Слова</h3>
+                    <div id="anatomy-word-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ГЕОМЕТРИЯ И ЧИСЛА -->
         <div id="geometry" class="section">
             <h2>Геометрия и базовые вычисления</h2>
             <div class="calc-grid">
-                <!-- Площадь квадрата -->
                 <div class="calc-card">
                     <h3>Площадь квадрата</h3>
                     <div class="input-group"><label>Сторона:</label><input type="number" id="sq-side" oninput="calcSquare()"></div>
                     <div class="result-box" id="res-square">Результат появится здесь</div>
                 </div>
-                <!-- Площадь прямоугольника -->
                 <div class="calc-card">
                     <h3>Площадь прямоугольника</h3>
                     <div class="input-group"><label>Сторона A:</label><input type="number" id="rect-a" oninput="calcRect()"></div>
                     <div class="input-group"><label>Сторона B:</label><input type="number" id="rect-b" oninput="calcRect()"></div>
                     <div class="result-box" id="res-rect">Результат появится здесь</div>
                 </div>
-                <!-- Среднее арифметическое -->
                 <div class="calc-card">
                     <h3>Среднее арифметическое</h3>
                     <div class="input-group"><label>Число 1:</label><input type="number" id="avg-1" oninput="calcAvg()"></div>
                     <div class="input-group"><label>Число 2:</label><input type="number" id="avg-2" oninput="calcAvg()"></div>
                     <div class="result-box" id="res-avg">Результат появится здесь</div>
                 </div>
-                <!-- Теорема Пифагора -->
                 <div class="calc-card">
                     <h3>Теорема Пифагора</h3>
                     <div class="input-group"><label>Катет A:</label><input type="number" id="pyth-a" oninput="calcPyth()"></div>
                     <div class="input-group"><label>Катет B:</label><input type="number" id="pyth-b" oninput="calcPyth()"></div>
                     <div class="result-box" id="res-pyth">Гипотенуза и площадь</div>
                 </div>
-                <!-- Високосный год -->
                 <div class="calc-card">
-                    <h3>Проверка високосного года</h3>
+                    <h3>Високосный год</h3>
                     <div class="input-group"><label>Год:</label><input type="number" id="leap-year" oninput="calcLeap()"></div>
                     <div class="result-box" id="res-leap">Введите год</div>
                 </div>
-                <!-- Четность -->
                 <div class="calc-card">
-                    <h3>Четное или нечетное?</h3>
+                    <h3>Четность числа</h3>
                     <div class="input-group"><label>Целое число:</label><input type="number" id="even-num" oninput="calcEven()"></div>
                     <div class="result-box" id="res-even">Введите число</div>
                 </div>
             </div>
         </div>
 
-        <!-- РАЗДЕЛ 3: МАССИВЫ И СТРОКИ -->
+        <!-- МАССИВЫ И СТРОКИ -->
         <div id="arrays" class="section">
             <h2>Работа с массивами и текстом</h2>
             <div class="calc-grid">
-                <!-- Квадраты чисел -->
                 <div class="calc-card">
                     <h3>Квадраты N-1, N, N+1</h3>
                     <div class="input-group"><label>Число N:</label><input type="number" id="sq-n" oninput="calcSqN()"></div>
                     <div class="result-box" id="res-sqn">Результат</div>
                 </div>
-                <!-- Сравнение двух чисел -->
                 <div class="calc-card">
                     <h3>Сравнение двух чисел</h3>
                     <div class="input-group"><label>Число 1:</label><input type="number" id="cmp-1" oninput="calcCmp()"></div>
                     <div class="input-group"><label>Число 2:</label><input type="number" id="cmp-2" oninput="calcCmp()"></div>
                     <div class="result-box" id="res-cmp">Результат</div>
                 </div>
-                <!-- Анализ строки -->
                 <div class="calc-card">
                     <h3>Анализ текста</h3>
                     <div class="input-group"><label>Введите текст:</label><input type="text" id="txt-analyze" oninput="analyzeText()"></div>
                     <div class="result-box" id="res-txt">Цифры: 0 | Без пробелов: ...</div>
                 </div>
-                <!-- Степени двойки -->
                 <div class="calc-card">
-                    <h3>Первые 16 степеней числа 2</h3>
-                    <button class="btn btn-primary" onclick="showPowersOf2()" style="margin-bottom:10px;">Показать степени</button>
+                    <h3>Степени двойки</h3>
+                    <button class="btn btn-primary" onclick="showPowersOf2()" style="margin-bottom:10px;">Показать</button>
                     <div class="result-box" id="res-pow2" style="max-height:200px; overflow-y:auto; white-space:pre-line;"></div>
                 </div>
             </div>
         </div>
 
-        <!-- РАЗДЕЛ 4: ИГРА -->
+        <!-- ИГРА -->
         <div id="game" class="section">
             <h2>🤖 Компьютер угадывает ваше число</h2>
             <div class="calc-card" style="max-width:500px;">
@@ -280,134 +317,179 @@
 
 <script>
 /* ==========================================
-   НАВИГАЦИЯ ПО САЙТУ
+   НАВИГАЦИЯ
    ========================================== */
 function showSection(id) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    event.target.classList.add('active');
+    event.currentTarget.classList.add('active');
 }
 
 /* ==========================================
-   ЛОГИКА КРОССВОРДА (16x16, 10 слов)
+   УНИВЕРСАЛЬНЫЙ ДВИЖОК КРОССВОРДОВ
    ========================================== */
-const CW_SIZE = 16;
-const cwWords = [
-    { num:1, word:"АНТИГИПЕРТЕНЗИВ", dir:"H", r:0, c:0, clue:"Лекарство для снижения давления (15)" },
-    { num:2, word:"БЕТАБЛОКАТОР", dir:"V", r:0, c:2, clue:"Группа препаратов от давления (12)" },
-    { num:3, word:"АНТИБИОТИК", dir:"H", r:2, c:0, clue:"Препарат против бактерий (10)" },
-    { num:4, word:"ЦИТОСТАТИК", dir:"V", r:2, c:5, clue:"Препарат, подавляющий деление клеток (10)" },
-    { num:5, word:"ГОРМОН", dir:"H", r:4, c:0, clue:"Биологически активное вещество (6)" },
-    { num:6, word:"ВАКЦИНА", dir:"V", r:4, c:3, clue:"Препарат для формирования иммунитета (7)" },
-    { num:7, word:"АНАЛЬГЕТИК", dir:"H", r:6, c:0, clue:"Обезболивающее средство (10)" },
-    { num:8, word:"СЕДАТИВ", dir:"V", r:6, c:7, clue:"Успокоительное средство (7)" },
-    { num:9, word:"ДИУРЕТИК", dir:"H", r:8, c:0, clue:"Мочегонное средство (8)" },
-    { num:10, word:"АНТИДЕПРЕССАНТ", dir:"V", r:0, c:9, clue:"Препарат для лечения депрессии (14)" }
-];
-
-const cwGrid = Array(CW_SIZE).fill().map(() => Array(CW_SIZE).fill(null));
-
-cwWords.forEach(item => {
-    for (let i = 0; i < item.word.length; i++) {
-        let r = item.dir === 'H' ? item.r : item.r + i;
-        let c = item.dir === 'H' ? item.c + i : item.c;
-        if (r < CW_SIZE && c < CW_SIZE) {
-            if (!cwGrid[r][c]) cwGrid[r][c] = { letter: item.word[i], nums: [] };
-            if (i === 0) cwGrid[r][c].nums.push(item.num);
-        }
-    }
-});
-
-// Рендер кроссворда
-(function renderCrossword() {
-    const table = document.getElementById('cw-table');
-    const cluesH = document.getElementById('clues-h');
-    const cluesV = document.getElementById('clues-v');
-    const wordList = document.getElementById('word-list');
-
-    for (let r = 0; r < CW_SIZE; r++) {
-        const tr = document.createElement('tr');
-        for (let c = 0; c < CW_SIZE; c++) {
-            const td = document.createElement('td');
-            const cell = cwGrid[r][c];
-            if (cell) {
-                if (cell.nums.length > 0) {
-                    const span = document.createElement('span');
-                    span.className = 'cw-num';
-                    span.textContent = cell.nums.join(',');
-                    td.appendChild(span);
+class CrosswordEngine {
+    constructor(config, prefix) {
+        this.size = config.size || 16;
+        this.words = config.words;
+        this.prefix = prefix; // уникальный префикс для DOM-элементов
+        
+        this.grid = Array(this.size).fill().map(() => Array(this.size).fill(null));
+        
+        // Заполнение матрицы
+        this.words.forEach(item => {
+            for (let i = 0; i < item.word.length; i++) {
+                let r = item.dir === 'H' ? item.r : item.r + i;
+                let c = item.dir === 'H' ? item.c + i : item.c;
+                if (r < this.size && c < this.size) {
+                    if (!this.grid[r][c]) this.grid[r][c] = { letter: item.word[i], nums: [] };
+                    if (i === 0) this.grid[r][c].nums.push(item.num);
                 }
-                const inp = document.createElement('input');
-                inp.maxLength = 1;
-                inp.dataset.answer = cell.letter;
-                inp.dataset.r = r;
-                inp.dataset.c = c;
-                inp.addEventListener('input', e => {
-                    e.target.value = e.target.value.toUpperCase().replace(/[^А-ЯЁ]/g, '');
-                    e.target.classList.remove('correct','incorrect');
-                    if (e.target.value) moveNext(r, c);
-                });
-                inp.addEventListener('keydown', e => navCW(e, r, c));
-                td.appendChild(inp);
-            } else {
-                td.className = 'empty';
             }
-            tr.appendChild(td);
-        }
-        table.appendChild(tr);
+        });
+        
+        this.render();
     }
-
-    cwWords.forEach(w => {
-        const d = document.createElement('div');
-        d.style.cssText = 'margin-bottom:8px;font-size:0.9rem;line-height:1.4;color:#334155;';
-        d.innerHTML = `<strong>${w.num}.</strong> ${w.clue}`;
-        (w.dir === 'H' ? cluesH : cluesV).appendChild(d);
-    });
-
-    cwWords.forEach(w => {
-        const t = document.createElement('span');
-        t.style.cssText = 'padding:4px 0;border-bottom:1px solid #f1f5f9;color:#475569;font-size:0.85rem;display:block;';
-        t.textContent = w.word;
-        wordList.appendChild(t);
-    });
-})();
-
-function moveNext(r, c) {
-    let n = document.querySelector(`input[data-r="${r}"][data-c="${c+1}"]`) ||
-            document.querySelector(`input[data-r="${r+1}"][data-c="${c}"]`);
-    if (n) n.focus();
+    
+    render() {
+        const table = document.getElementById(`${this.prefix}-cw-table`);
+        const cluesH = document.getElementById(`${this.prefix}-clues-h`);
+        const cluesV = document.getElementById(`${this.prefix}-clues-v`);
+        const wordList = document.getElementById(`${this.prefix}-word-list`);
+        
+        // Таблица
+        for (let r = 0; r < this.size; r++) {
+            const tr = document.createElement('tr');
+            for (let c = 0; c < this.size; c++) {
+                const td = document.createElement('td');
+                const cell = this.grid[r][c];
+                if (cell) {
+                    if (cell.nums.length > 0) {
+                        const span = document.createElement('span');
+                        span.className = 'cw-num';
+                        span.textContent = cell.nums.join(',');
+                        td.appendChild(span);
+                    }
+                    const inp = document.createElement('input');
+                    inp.maxLength = 1;
+                    inp.dataset.answer = cell.letter;
+                    inp.dataset.r = r;
+                    inp.dataset.c = c;
+                    inp.addEventListener('input', e => {
+                        e.target.value = e.target.value.toUpperCase().replace(/[^А-ЯЁ]/g, '');
+                        e.target.classList.remove('correct','incorrect');
+                        if (e.target.value) this.moveNext(r, c);
+                    });
+                    inp.addEventListener('keydown', e => this.nav(e, r, c));
+                    td.appendChild(inp);
+                } else {
+                    td.className = 'empty';
+                }
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        
+        // Подсказки
+        this.words.forEach(w => {
+            const d = document.createElement('div');
+            d.style.cssText = 'margin-bottom:8px;font-size:0.9rem;line-height:1.4;color:#334155;';
+            d.innerHTML = `<strong>${w.num}.</strong> ${w.clue}`;
+            (w.dir === 'H' ? cluesH : cluesV).appendChild(d);
+        });
+        
+        // Список слов
+        this.words.forEach(w => {
+            const t = document.createElement('span');
+            t.style.cssText = 'padding:4px 0;border-bottom:1px solid #f1f5f9;color:#475569;font-size:0.85rem;display:block;';
+            t.textContent = w.word;
+            wordList.appendChild(t);
+        });
+    }
+    
+    moveNext(r, c) {
+        let n = document.querySelector(`#${this.prefix}-cw-table input[data-r="${r}"][data-c="${c+1}"]`) ||
+                document.querySelector(`#${this.prefix}-cw-table input[data-r="${r+1}"][data-c="${c}"]`);
+        if (n) n.focus();
+    }
+    
+    nav(e, r, c) {
+        let sel;
+        if (e.key==='ArrowRight') sel=`#${this.prefix}-cw-table input[data-r="${r}"][data-c="${c+1}"]`;
+        if (e.key==='ArrowLeft') sel=`#${this.prefix}-cw-table input[data-r="${r}"][data-c="${c-1}"]`;
+        if (e.key==='ArrowDown') sel=`#${this.prefix}-cw-table input[data-r="${r+1}"][data-c="${c}"]`;
+        if (e.key==='ArrowUp') sel=`#${this.prefix}-cw-table input[data-r="${r-1}"][data-c="${c}"]`;
+        if (sel) { const el=document.querySelector(sel); if(el){e.preventDefault();el.focus();} }
+    }
+    
+    check() {
+        let ok = 0, total = 0;
+        document.querySelectorAll(`#${this.prefix}-cw-table input`).forEach(inp => {
+            total++;
+            if (inp.value === inp.dataset.answer) { inp.classList.add('correct'); inp.classList.remove('incorrect'); ok++; }
+            else if (inp.value !== '') { inp.classList.add('incorrect'); inp.classList.remove('correct'); }
+            else { inp.classList.remove('correct','incorrect'); }
+        });
+        if (ok === total && total > 0) alert("🎉 Поздравляем! Кроссворд решен верно!");
+    }
+    
+    reset() {
+        document.querySelectorAll(`#${this.prefix}-cw-table input`).forEach(inp => {
+            inp.value = ''; inp.classList.remove('correct','incorrect');
+        });
+        document.querySelector(`#${this.prefix}-cw-table input`)?.focus();
+    }
 }
 
-function navCW(e, r, c) {
-    let sel;
-    if (e.key==='ArrowRight') sel=`input[data-r="${r}"][data-c="${c+1}"]`;
-    if (e.key==='ArrowLeft') sel=`input[data-r="${r}"][data-c="${c-1}"]`;
-    if (e.key==='ArrowDown') sel=`input[data-r="${r+1}"][data-c="${c}"]`;
-    if (e.key==='ArrowUp') sel=`input[data-r="${r-1}"][data-c="${c}"]`;
-    if (sel) { const el=document.querySelector(sel); if(el){e.preventDefault();el.focus();} }
-}
+// Конфигурация Фармакологии
+const pharmaConfig = {
+    size: 16,
+    words: [
+        { num:1, word:"АНТИГИПЕРТЕНЗИВ", dir:"H", r:0, c:0, clue:"Лекарство для снижения давления (15)" },
+        { num:2, word:"БЕТАБЛОКАТОР", dir:"V", r:0, c:2, clue:"Группа препаратов от давления (12)" },
+        { num:3, word:"АНТИБИОТИК", dir:"H", r:2, c:0, clue:"Препарат против бактерий (10)" },
+        { num:4, word:"ЦИТОСТАТИК", dir:"V", r:2, c:5, clue:"Препарат, подавляющий деление клеток (10)" },
+        { num:5, word:"ГОРМОН", dir:"H", r:4, c:0, clue:"Биологически активное вещество (6)" },
+        { num:6, word:"ВАКЦИНА", dir:"V", r:4, c:3, clue:"Препарат для формирования иммунитета (7)" },
+        { num:7, word:"АНАЛЬГЕТИК", dir:"H", r:6, c:0, clue:"Обезболивающее средство (10)" },
+        { num:8, word:"СЕДАТИВ", dir:"V", r:6, c:7, clue:"Успокоительное средство (7)" },
+        { num:9, word:"ДИУРЕТИК", dir:"H", r:8, c:0, clue:"Мочегонное средство (8)" },
+        { num:10, word:"АНТИДЕПРЕССАНТ", dir:"V", r:0, c:9, clue:"Препарат для лечения депрессии (14)" }
+    ]
+};
 
-function checkCrossword() {
-    let ok = 0, total = 0;
-    document.querySelectorAll('#cw-table input').forEach(inp => {
-        total++;
-        if (inp.value === inp.dataset.answer) { inp.classList.add('correct'); inp.classList.remove('incorrect'); ok++; }
-        else if (inp.value !== '') { inp.classList.add('incorrect'); inp.classList.remove('correct'); }
-        else { inp.classList.remove('correct','incorrect'); }
-    });
-    if (ok === total && total > 0) alert("🎉 Поздравляем! Кроссворд решен верно!");
-}
+// Конфигурация Анатомии (10 слов, проверенные пересечения)
+const anatomyConfig = {
+    size: 16,
+    words: [
+        { num:1, word:"СКЕЛЕТ", dir:"H", r:0, c:0, clue:"Опорная структура тела человека (6)" },
+        { num:2, word:"СЕРДЦЕ", dir:"V", r:0, c:2, clue:"Главный орган кровообращения (6)" },
+        { num:3, word:"ПОЗВОНОЧНИК", dir:"H", r:2, c:0, clue:"Ось скелета из позвонков (11)" },
+        { num:4, word:"ЧЕРЕП", dir:"V", r:2, c:5, clue:"Костная коробка головного мозга (5)" },
+        { num:5, word:"МЫШЦА", dir:"H", r:4, c:0, clue:"Орган движения и сокращения (5)" },
+        { num:6, word:"СУСТАВ", dir:"V", r:4, c:3, clue:"Подвижное соединение костей (6)" },
+        { num:7, word:"КОСТЬ", dir:"H", r:6, c:0, clue:"Твердая часть скелета (5)" },
+        { num:8, word:"НЕРВ", dir:"V", r:6, c:7, clue:"Структура передачи импульсов (4)" },
+        { num:9, word:"МОЗГ", dir:"H", r:8, c:0, clue:"Центр нервной системы (4)" },
+        { num:10, word:"АРТЕРИЯ", dir:"V", r:0, c:9, clue:"Сосуд, несущий кровь от сердца (7)" }
+    ]
+};
 
-function resetCrossword() {
-    document.querySelectorAll('#cw-table input').forEach(inp => {
-        inp.value = ''; inp.classList.remove('correct','incorrect');
-    });
-    document.querySelector('#cw-table input')?.focus();
+// Инициализация обоих кроссвордов
+const pharmaCW = new CrosswordEngine(pharmaConfig, 'pharma');
+const anatomyCW = new CrosswordEngine(anatomyConfig, 'anatomy');
+
+// Глобальные функции для кнопок
+function checkCW(prefix) { 
+    prefix === 'pharma' ? pharmaCW.check() : anatomyCW.check(); 
+}
+function resetCW(prefix) { 
+    prefix === 'pharma' ? pharmaCW.reset() : anatomyCW.reset(); 
 }
 
 /* ==========================================
-   КАЛЬКУЛЯТОРЫ (Python → JS)
+   КАЛЬКУЛЯТОРЫ
    ========================================== */
 function getVal(id) { return parseFloat(document.getElementById(id).value); }
 function setRes(id, text) { document.getElementById(id).textContent = text; }
@@ -416,101 +498,72 @@ function calcSquare() {
     const v = getVal('sq-side');
     setRes('res-square', isNaN(v) ? 'Введите число' : `Площадь квадрата: ${(v*v).toFixed(2)}`);
 }
-
 function calcRect() {
     const a = getVal('rect-a'), b = getVal('rect-b');
     setRes('res-rect', (isNaN(a)||isNaN(b)) ? 'Введите оба числа' : `Площадь прямоугольника: ${(a*b).toFixed(2)}`);
 }
-
 function calcAvg() {
     const a = getVal('avg-1'), b = getVal('avg-2');
     setRes('res-avg', (isNaN(a)||isNaN(b)) ? 'Введите оба числа' : `Среднее арифметическое: ${((a+b)/2).toFixed(2)}`);
 }
-
 function calcPyth() {
     const a = getVal('pyth-a'), b = getVal('pyth-b');
     if (isNaN(a)||isNaN(b)) { setRes('res-pyth','Введите оба катета'); return; }
-    const hyp = Math.sqrt(a*a + b*b);
-    const area = (a*b)/2;
-    setRes('res-pyth', `Гипотенуза: ${hyp.toFixed(4)}\nПлощадь: ${area.toFixed(2)}`);
+    setRes('res-pyth', `Гипотенуза: ${Math.sqrt(a*a+b*b).toFixed(4)}\nПлощадь: ${(a*b/2).toFixed(2)}`);
 }
-
 function calcLeap() {
     const y = parseInt(document.getElementById('leap-year').value);
     if (isNaN(y)) { setRes('res-leap','Введите год'); return; }
-    const isLeap = (y%4===0 && y%100!==0) || (y%400===0);
-    setRes('res-leap', isLeap ? '✅ Год високосный' : '❌ Год не високосный');
+    setRes('res-leap', ((y%4===0&&y%100!==0)||(y%400===0)) ? '✅ Високосный' : ' Не високосный');
 }
-
 function calcEven() {
     const n = parseInt(document.getElementById('even-num').value);
     if (isNaN(n)) { setRes('res-even','Введите целое число'); return; }
-    setRes('res-even', n%2===0 ? '✅ Число четное' : '❌ Число нечетное');
+    setRes('res-even', n%2===0 ? '✅ Четное' : '❌ Нечетное');
 }
-
 function calcSqN() {
     const n = parseInt(document.getElementById('sq-n').value);
     if (isNaN(n)) { setRes('res-sqn','Введите N'); return; }
     setRes('res-sqn', `${(n-1)**2}, ${n**2}, ${(n+1)**2}`);
 }
-
 function calcCmp() {
     const a = getVal('cmp-1'), b = getVal('cmp-2');
     if (isNaN(a)||isNaN(b)) { setRes('res-cmp','Введите оба числа'); return; }
-    if (a < b) setRes('res-cmp', `Первое меньше второго. Сумма: ${(a+b).toFixed(2)}`);
-    else setRes('res-cmp', `Первое не меньше второго. Разность: ${(a-b).toFixed(2)}`);
+    setRes('res-cmp', a<b ? `Первое меньше. Сумма: ${(a+b).toFixed(2)}` : `Первое не меньше. Разность: ${(a-b).toFixed(2)}`);
 }
-
 function analyzeText() {
     const txt = document.getElementById('txt-analyze').value;
-    const digits = (txt.match(/\d/g) || []).length;
-    const noSpaces = txt.replace(/\s/g, '');
-    setRes('res-txt', `Цифр: ${digits}\nБез пробелов: ${noSpaces}`);
+    setRes('res-txt', `Цифр: ${(txt.match(/\d/g)||[]).length}\nБез пробелов: ${txt.replace(/\s/g,'')}`);
 }
-
 function showPowersOf2() {
-    let res = '';
-    for (let i = 0; i < 16; i++) res += `2^${i} = ${2**i}\n`;
+    let res=''; for(let i=0;i<16;i++) res+=`2^${i} = ${2**i}\n`;
     setRes('res-pow2', res.trim());
 }
 
 /* ==========================================
-   ИГРА: КОМПЬЮТЕР УГАДЫВАЕТ ЧИСЛО
+   ИГРА: БИНАРНЫЙ ПОИСК
    ========================================== */
-let gameLow, gameHigh, gameQuestions;
-
+let gameLow, gameHigh, gameQ;
 function startGame() {
     gameLow = parseInt(document.getElementById('game-n').value);
     gameHigh = parseInt(document.getElementById('game-m').value);
-    gameQuestions = 0;
-
-    if (isNaN(gameLow) || isNaN(gameHigh) || gameLow >= gameHigh) {
-        alert('Ошибка: N должно быть строго меньше M');
-        return;
-    }
-
-    document.getElementById('game-area').style.display = 'block';
-    document.getElementById('game-result').textContent = '';
+    gameQ = 0;
+    if (isNaN(gameLow)||isNaN(gameHigh)||gameLow>=gameHigh) { alert('N должно быть < M'); return; }
+    document.getElementById('game-area').style.display='block';
+    document.getElementById('game-result').textContent='';
     askQuestion();
 }
-
 function askQuestion() {
-    if (gameLow >= gameHigh) {
-        const minQ = Math.ceil(Math.log2(gameHigh - gameLow + 1)) || 0;
-        document.getElementById('game-question').textContent = '';
-        document.getElementById('game-result').innerHTML = 
-            `✅ Я угадал! Ваше число: <strong>${gameLow}</strong><br>` +
-            `📊 Вопросов: ${gameQuestions} | Минимум (бинарный поиск): ${minQ}`;
+    if (gameLow>=gameHigh) {
+        document.getElementById('game-question').textContent='';
+        document.getElementById('game-result').innerHTML=`✅ Число: <strong>${gameLow}</strong><br> Вопросов: ${gameQ}`;
         return;
     }
-    const mid = Math.floor((gameLow + gameHigh) / 2);
-    gameQuestions++;
-    document.getElementById('game-question').textContent = `❓ Вопрос ${gameQuestions}: Ваше число больше ${mid}?`;
+    const mid=Math.floor((gameLow+gameHigh)/2); gameQ++;
+    document.getElementById('game-question').textContent=`❓ Вопрос ${gameQ}: Ваше число больше ${mid}?`;
 }
-
 function gameAnswer(isGreater) {
-    if (isGreater) gameLow = Math.floor((gameLow + gameHigh) / 2) + 1;
-    else gameHigh = Math.floor((gameLow + gameHigh) / 2);
+    isGreater ? gameLow=Math.floor((gameLow+gameHigh)/2)+1 : gameHigh=Math.floor((gameLow+gameHigh)/2);
     askQuestion();
 }
 </script>
